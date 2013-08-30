@@ -234,6 +234,18 @@
     targetView.extOrigin = CGPointMake(targetView.extOrigin.y, midYPosition);
 }
 
++ (void)sizeView:(UIView *)targetView toParent:(UIView *)parentView edgeInsets:(UIEdgeInsets)edgeInsets
+{
+    CGRect zeroOriginFrame = CGRectMake(0.0f, 0.0f, parentView.extSize.width, parentView.extSize.height);
+    targetView.frame = UIEdgeInsetsInsetRect(zeroOriginFrame, edgeInsets);
+}
+
++ (void)sizeView:(UIView *)targetView toParent:(UIView *)parentView insetSize:(CGSize)insetSize
+{
+    CGRect zeroOriginFrame = CGRectMake(0.0f, 0.0f, parentView.extSize.width, parentView.extSize.height);
+    targetView.frame = CGRectInset(zeroOriginFrame, insetSize.width, insetSize.height);
+}
+
 + (void)sizeButton:(UIButton *)button matchHeightOfView:(UIView *)view
 {
     CGFloat heightDifference = floorf(button.imageView.image.size.height - view.extSize.height);
