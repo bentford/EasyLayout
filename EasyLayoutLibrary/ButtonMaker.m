@@ -9,8 +9,6 @@
 
 #import "ButtonMaker.h"
 
-#import "NSString+Ext.h"
-
 @implementation ButtonMaker
 + (UIButton *)genericButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action
 {
@@ -102,7 +100,8 @@
 + (void)setText:(NSString *)text forButton:(UIButton *)button linebreakMode:(NSLineBreakMode)linebreakMode constrainedToSize:(CGSize)constrainedToSize
 {
     // the normalized text is used to calculate on something if incoming text was blank
-    NSString *normalizedText = [NSString extContainsText:text] == YES ? text : @"MMM";
+    BOOL containsText = (text != nil && [[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] > 0);
+    NSString *normalizedText = containsText ? text : @"MMM";
     
     // NewHouse and Futura fonts have a bug so pad them in the end
     normalizedText = [NSString stringWithFormat:@"%@ ", normalizedText];

@@ -6,7 +6,6 @@
 //
 
 #import "EasyLayout.h"
-#import "NSString+Ext.h"
 
 @implementation UIView(EasyLayoutMethods)
 

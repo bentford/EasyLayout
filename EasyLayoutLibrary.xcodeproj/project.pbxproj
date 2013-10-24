@@ -17,9 +17,6 @@
 		3509B9F51819CF420093F714 /* ButtonMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9F01819CF420093F714 /* ButtonMaker.m */; };
 		3509B9F61819CF420093F714 /* EasyLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9F21819CF420093F714 /* EasyLayout.m */; };
 		3509B9F71819CF420093F714 /* QuickFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9F41819CF420093F714 /* QuickFrame.m */; };
-		3509B9FA1819CFEB0093F714 /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9F91819CFEB0093F714 /* NSString+Ext.m */; };
-		3509B9FD1819D0090093F714 /* NSArray+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9FC1819D0090093F714 /* NSArray+Ext.m */; };
-		3509BA001819D0270093F714 /* NSRangeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9FF1819D0270093F714 /* NSRangeExt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,12 +57,6 @@
 		3509B9F21819CF420093F714 /* EasyLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyLayout.m; sourceTree = "<group>"; };
 		3509B9F31819CF420093F714 /* QuickFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickFrame.h; sourceTree = "<group>"; };
 		3509B9F41819CF420093F714 /* QuickFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickFrame.m; sourceTree = "<group>"; };
-		3509B9F81819CFEB0093F714 /* NSString+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Ext.h"; sourceTree = "<group>"; };
-		3509B9F91819CFEB0093F714 /* NSString+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Ext.m"; sourceTree = "<group>"; };
-		3509B9FB1819D0090093F714 /* NSArray+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Ext.h"; sourceTree = "<group>"; };
-		3509B9FC1819D0090093F714 /* NSArray+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Ext.m"; sourceTree = "<group>"; };
-		3509B9FE1819D0270093F714 /* NSRangeExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSRangeExt.h; sourceTree = "<group>"; };
-		3509B9FF1819D0270093F714 /* NSRangeExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSRangeExt.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,12 +121,6 @@
 				3509B9F21819CF420093F714 /* EasyLayout.m */,
 				3509B9F31819CF420093F714 /* QuickFrame.h */,
 				3509B9F41819CF420093F714 /* QuickFrame.m */,
-				3509B9F81819CFEB0093F714 /* NSString+Ext.h */,
-				3509B9F91819CFEB0093F714 /* NSString+Ext.m */,
-				3509B9FB1819D0090093F714 /* NSArray+Ext.h */,
-				3509B9FC1819D0090093F714 /* NSArray+Ext.m */,
-				3509B9FE1819D0270093F714 /* NSRangeExt.h */,
-				3509B9FF1819D0270093F714 /* NSRangeExt.m */,
 			);
 			path = EasyLayoutLibrary;
 			sourceTree = "<group>";
@@ -249,10 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3509B9F71819CF420093F714 /* QuickFrame.m in Sources */,
-				3509B9FD1819D0090093F714 /* NSArray+Ext.m in Sources */,
-				3509B9FA1819CFEB0093F714 /* NSString+Ext.m in Sources */,
 				3509B9F51819CF420093F714 /* ButtonMaker.m in Sources */,
-				3509BA001819D0270093F714 /* NSRangeExt.m in Sources */,
 				3509B9F61819CF420093F714 /* EasyLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
