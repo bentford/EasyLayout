@@ -8,7 +8,7 @@
 #import "EasyLayout.h"
 #import "NSString+Ext.h"
 
-@implementation UIView(EasyLayoutMethods) 
+@implementation UIView(EasyLayoutMethods)
 
 - (void)setExtOrigin:(CGPoint)extOrigin {
     self.frame = CGRectMake(extOrigin.x, extOrigin.y, self.frame.size.width, self.frame.size.height);
@@ -93,6 +93,12 @@
                                        parentView.extSize.height-targetView.extSize.height+offset.height);
 }
 
++ (void)bottomLeftView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset
+{
+    targetView.extOrigin = CGPointMake(floorf(offset.width),
+                                       floorf(parentView.extSize.height-targetView.extSize.height+offset.height));
+}
+
 + (void)topRightView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset
 {
     targetView.extOrigin = CGPointMake(parentView.bounds.size.width-targetView.bounds.size.width+offset.width,
@@ -132,14 +138,14 @@
 }
 
 + (void)positionView:(UIView *)targetView belowView:(UIView *)siblingView offset:(CGSize)offset {
-    targetView.extOrigin = CGPointMake(siblingView.frame.origin.x+offset.width,
-                                       siblingView.frame.origin.y+siblingView.frame.size.height+offset.height);
+    targetView.extOrigin = CGPointMake(floorf(siblingView.frame.origin.x+offset.width),
+                                       floorf(siblingView.frame.origin.y+siblingView.frame.size.height+offset.height));
 }
 
 + (void)positionView:(UIView *)targetView belowViews:(NSArray *)siblingViews offset:(CGSize)offset
 {
     UIView *lowestSibling = [EasyLayout lowestViewFromArray:siblingViews ignoreZeroHeight:YES];
-
+    
     // ignore zero heights only if something was found
     if (lowestSibling == nil)
         lowestSibling = [EasyLayout lowestViewFromArray:siblingViews ignoreZeroHeight:NO];
@@ -200,6 +206,11 @@
     targetView.extSize = CGSizeMake(targetView.extSize.width+heightDifference+offset, targetView.extSize.height);
 }
 
++ (void)modifyWidth:(UIView *)targetView matchView:(UIView *)matchView offset:(CGFloat)offset
+{
+    targetView.extSize = CGSizeMake(matchView.extSize.width+offset, matchView.extSize.height+offset);
+}
+
 + (void)positionView:(UIView *)targetView centerOfView:(UIView *)siblingView offset:(CGSize)offset
 {
     targetView.extOrigin = CGPointMake(siblingView.extMedial.x-targetView.extHalfSize.width+offset.width,
@@ -234,6 +245,13 @@
     targetView.extOrigin = CGPointMake(targetView.extOrigin.y, midYPosition);
 }
 
++ (void)sizeButton:(UIButton *)button matchHeightOfView:(UIView *)view
+{
+    CGFloat heightDifference = floorf(button.imageView.image.size.height - view.extSize.height);
+    button.extQuickFrame.size.height = view.extSize.height;
+    [button setImageEdgeInsets:UIEdgeInsetsMake(heightDifference, 0.0f, 0.0f, 0.0f)];
+}
+
 + (void)sizeView:(UIView *)targetView toParent:(UIView *)parentView edgeInsets:(UIEdgeInsets)edgeInsets
 {
     CGRect zeroOriginFrame = CGRectMake(0.0f, 0.0f, parentView.extSize.width, parentView.extSize.height);
@@ -244,13 +262,6 @@
 {
     CGRect zeroOriginFrame = CGRectMake(0.0f, 0.0f, parentView.extSize.width, parentView.extSize.height);
     targetView.frame = CGRectInset(zeroOriginFrame, insetSize.width, insetSize.height);
-}
-
-+ (void)sizeButton:(UIButton *)button matchHeightOfView:(UIView *)view
-{
-    CGFloat heightDifference = floorf(button.imageView.image.size.height - view.extSize.height);
-    button.extQuickFrame.size.height = view.extSize.height;
-    [button setImageEdgeInsets:UIEdgeInsetsMake(heightDifference, 0.0f, 0.0f, 0.0f)];
 }
 
 @end
@@ -267,7 +278,7 @@
         
         if (lowestView == nil || view.extTerminus.y > lowestView.extTerminus.y)
             lowestView = view;
-            
+        
     }
     return lowestView;
 }
@@ -280,49 +291,132 @@
 {
     switch (lineMode) {
         case ELLineModeSingle:
-            [EasyLayout setText:label.text forLabel:label maxWidth:maxWidth];
+            label.lineBreakMode = NSLineBreakByTruncatingTail;
+            label.numberOfLines = 1;
             break;
         case ELLineModeMulti:
-            [EasyLayout setText:label.text forLabel:label maxSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
+            label.lineBreakMode = NSLineBreakByWordWrapping;
+            // zero indicates unlimited lines allowed
+            label.numberOfLines = 0;
+            break;
+    }
+    
+    if (label.attributedText != nil)
+        label.extSize = [EasyLayout sizeAttributedText:label.attributedText mode:lineMode maxWidth:maxWidth];
+    else
+        label.extSize = [EasyLayout sizeText:label.text font:label.font mode:lineMode maxWidth:maxWidth];
+}
+
++ (CGSize)sizeAttributedText:(NSAttributedString *)attributedText mode:(ELLineMode)lineMode maxWidth:(CGFloat)maxWidth
+{
+    switch (lineMode) {
+        case ELLineModeSingle:
+            return [EasyLayout sizeAttributedText:attributedText maxWidth:maxWidth];
+            break;
+        case ELLineModeMulti:
+            return [EasyLayout sizeAttributedText:attributedText maxSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
+            break;
+    }
+}
+
++ (CGSize)sizeText:(NSString *)text font:(UIFont *)font mode:(ELLineMode)lineMode maxWidth:(CGFloat)maxWidth
+{
+    switch (lineMode) {
+        case ELLineModeSingle:
+            return [EasyLayout sizeText:text font:font maxWidth:maxWidth];
+            break;
+        case ELLineModeMulti:
+            return [EasyLayout sizeText:text font:font maxSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
             break;
     }
 }
 
 #pragma mark - Private Methods
 
-+ (void)setText:(NSString *)text forLabel:(UILabel *)label maxSize:(CGSize)maxSize
++ (CGSize)sizeAttributedText:(NSAttributedString *)attributedText maxSize:(CGSize)maxSize
 {
-    [self setText:text forLabel:label linebreakMode:NSLineBreakByWordWrapping
-                                      constrainedToSize:maxSize];
+    return [self sizeAttributedText:attributedText linebreakMode:NSLineBreakByWordWrapping
+                  constrainedToSize:maxSize];
 }
 
-+ (void)setText:(NSString *)text forLabel:(UILabel *)label maxWidth:(CGFloat)maxWidth
++ (CGSize)sizeAttributedText:(NSAttributedString *)attributedText maxWidth:(CGFloat)maxWidth
 {
-    [self setText:text forLabel:label linebreakMode:NSLineBreakByTruncatingTail
-                                      constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
+    return [self sizeAttributedText:attributedText linebreakMode:NSLineBreakByTruncatingTail
+                  constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
 }
 
-+ (void)setText:(NSString *)text forLabel:(UILabel *)label linebreakMode:(NSLineBreakMode)linebreakMode constrainedToSize:(CGSize)constrainedToSize
++ (CGSize)sizeText:(NSString *)text font:(UIFont *)font maxSize:(CGSize)maxSize
+{
+    return [self sizeText:text font:font linebreakMode:NSLineBreakByWordWrapping
+        constrainedToSize:maxSize];
+}
+
++ (CGSize)sizeText:(NSString *)text font:(UIFont *)font maxWidth:(CGFloat)maxWidth
+{
+    return [self sizeText:text font:font linebreakMode:NSLineBreakByTruncatingTail
+        constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
+}
+
++ (CGSize)sizeAttributedText:(NSAttributedString *)attributedText linebreakMode:(NSLineBreakMode)linebreakMode
+           constrainedToSize:(CGSize)constrainedToSize
 {
     CGSize textSize;
     switch (linebreakMode) {
         case NSLineBreakByWordWrapping:
         case NSLineBreakByCharWrapping:
-            textSize = [text sizeWithFont:label.font constrainedToSize:constrainedToSize lineBreakMode:linebreakMode];
-            label.numberOfLines = NSIntegerMax;
+            textSize = [attributedText boundingRectWithSize:constrainedToSize
+                                                    options:NSStringDrawingUsesLineFragmentOrigin
+                                                    context:nil].size;
             break;
             
         case NSLineBreakByClipping:
         case NSLineBreakByTruncatingHead:
         case NSLineBreakByTruncatingMiddle:
         case NSLineBreakByTruncatingTail:
-            textSize = [text sizeWithFont:label.font forWidth:constrainedToSize.width lineBreakMode:linebreakMode];
+            textSize = [attributedText boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
+                                                    options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
+                                                    context:nil].size;
             break;
     }
     
-    label.text = text;
-    label.frame = CGRectMake(label.frame.origin.x,label.frame.origin.y,textSize.width,textSize.height);
-    
+    return CGSizeMake(ceilf(textSize.width), ceilf(textSize.height));
 }
+
++ (CGSize)sizeText:(NSString *)text font:(UIFont *)font linebreakMode:(NSLineBreakMode)linebreakMode constrainedToSize:(CGSize)constrainedToSize
+{
+    CGSize textSize;
+    switch (linebreakMode) {
+        case NSLineBreakByWordWrapping:
+        case NSLineBreakByCharWrapping:
+            textSize = [text boundingRectWithSize:constrainedToSize
+                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:@{NSFontAttributeName:font,NSKernAttributeName:@(-1.0f)}
+                                          context:nil].size;
+            break;
+            
+        case NSLineBreakByClipping:
+        case NSLineBreakByTruncatingHead:
+        case NSLineBreakByTruncatingMiddle:
+        case NSLineBreakByTruncatingTail:
+            textSize = [text boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
+                                          options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:@{NSFontAttributeName:font}
+                                          context:nil].size;
+            break;
+    }
+    
+    return CGSizeMake(ceilf(textSize.width), ceilf(textSize.height));
+}
+
 #pragma mark -
 @end
+
+@implementation EasyLayout(TextField)
++ (void)sizeTextFieldHeight:(UITextField *)textField offset:(CGFloat)offset
+{
+    static NSString *placeHolder = @"M";
+    CGSize calculatedSize = [EasyLayout sizeText:placeHolder font:textField.font mode:ELLineModeSingle maxWidth:CGFLOAT_MAX];
+    textField.extQuickFrame.size.height = calculatedSize.height+offset;
+}
+@end
+

@@ -8,15 +8,15 @@
 
 
 #import "ButtonMaker.h"
-#import "UIImage+Ext.h"
+
 #import "NSString+Ext.h"
 
 @implementation ButtonMaker
 + (UIButton *)genericButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action
 {
     UIButton *newButton = [ButtonMaker textButtonWithText:title
-                                      font:[UIFont systemFontOfSize:15.0f] color:[UIColor blueColor]
-                           normalImageName:nil selectedImageName:nil];
+                                                     font:[UIFont systemFontOfSize:25.0f] color:[UIColor colorWithRed:27.0f/255.0f green:119.0f/255.0f blue:255.0f/255.0f alpha:1.0f]
+                                          normalImageName:nil selectedImageName:nil];
     
     [newButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
@@ -39,28 +39,29 @@
 {
     UIImage *normalImage = [UIImage imageNamed:normalImageName];
     UIImage *selectedImage = [UIImage imageNamed:selectedImageName];
-
+    
     
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [newButton setTitleColor:color forState:UIControlStateNormal];
     [newButton setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateHighlighted];
+    [newButton setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateDisabled];
     newButton.titleLabel.font = font;
-
+    
     // set images if they were specified
     if (normalImage != nil)
         [newButton setBackgroundImage:normalImage forState:UIControlStateNormal];
-
+    
     if (selectedImage != nil)
         [newButton setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
-
+    
     // size button via text
     [ButtonMaker setText:text forButton:newButton maxWidth:CGFLOAT_MAX];
     
     // override size with image if it was supplied
     if (normalImage != nil)
         newButton.frame = CGRectMake(0.0f, 0.0f, normalImage.size.width, normalImage.size.height);
-
+    
     return newButton;
 }
 
@@ -102,7 +103,7 @@
 {
     // the normalized text is used to calculate on something if incoming text was blank
     NSString *normalizedText = [NSString extContainsText:text] == YES ? text : @"MMM";
-
+    
     // NewHouse and Futura fonts have a bug so pad them in the end
     normalizedText = [NSString stringWithFormat:@"%@ ", normalizedText];
     
@@ -110,20 +111,26 @@
     switch (linebreakMode) {
         case NSLineBreakByWordWrapping:
         case NSLineBreakByCharWrapping:
-            textSize = [normalizedText sizeWithFont:button.titleLabel.font constrainedToSize:constrainedToSize lineBreakMode:linebreakMode];
+            textSize = [text boundingRectWithSize:constrainedToSize
+                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:@{NSFontAttributeName:button.titleLabel.font}
+                                          context:nil].size;
             break;
         case NSLineBreakByClipping:
         case NSLineBreakByTruncatingHead:
         case NSLineBreakByTruncatingMiddle:
         case NSLineBreakByTruncatingTail:
-            textSize = [normalizedText sizeWithFont:button.titleLabel.font forWidth:constrainedToSize.width lineBreakMode:linebreakMode];
+            textSize = [text boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
+                                          options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:@{NSFontAttributeName:button.titleLabel.font}
+                                          context:nil].size;
             break;
     }
-
+    
     // don't actually use the normalized text
     [button setTitle:text forState:UIControlStateNormal];
     button.titleLabel.lineBreakMode = linebreakMode;
-    button.frame = CGRectMake(button.frame.origin.x,button.frame.origin.y,textSize.width,textSize.height);    
+    button.frame = CGRectMake(button.frame.origin.x,button.frame.origin.y,textSize.width,textSize.height);
 }
 
 @end

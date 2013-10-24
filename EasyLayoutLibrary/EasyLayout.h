@@ -33,6 +33,7 @@
 + (void)rightCenterView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
 + (void)leftCenterView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
 + (void)bottomRightView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
++ (void)bottomLeftView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
 + (void)topRightView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
 
 + (void)positionView:(UIView *)targetView toLeftOfView:(UIView *)siblingView offset:(CGSize)offset;
@@ -64,8 +65,6 @@
 + (void)positionView:(UIView *)targetView inbetweenHorizontallyFirstView:(UIView *)firstView secondView:(UIView *)secondView offset:(CGSize)offset;
 + (void)positionView:(UIView *)targetView inbetweenVerticallyFirstView:(UIView *)firstView secondView:(UIView *)secondView offset:(CGSize)offset;
 
-+ (void)sizeView:(UIView *)targetView toParent:(UIView *)parentView edgeInsets:(UIEdgeInsets)edgeInsets;
-+ (void)sizeView:(UIView *)targetView toParent:(UIView *)parentView insetSize:(CGSize)insetSize;
 
 + (void)sizeButton:(UIButton *)button matchHeightOfView:(UIView *)view;
 @end
