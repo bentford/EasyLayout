@@ -82,14 +82,14 @@
     CGFloat startX = floorf((parentView.extSize.width - totalWidth)/2.0f);
     
     CGFloat xPos = startX + offset.width;
-    NSUInteger iterator = 0;
+    UIView *previousView = nil;
     for (UIView *targetView in targetViews) {
+        if (!previousView)
+            targetView.extOrigin = CGPointMake(xPos, offset.height);
+        else
+            [EasyLayout positionView:targetView toRightOfView:previousView offset:CGSizeMake(padding, 0.0f)];
         
-        targetView.extQuickFrame.origin.x = floorf(xPos + iterator ? padding : 0.0f);
-        targetView.extQuickFrame.origin.y = offset.height;
-        
-        xPos = targetView.extTerminus.x;
-        iterator++;
+        previousView = targetView;
     }
 
 }
