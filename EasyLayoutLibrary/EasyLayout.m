@@ -76,6 +76,24 @@
                                        0.0f+offset.height);
 }
 
++ (void)topCenterViews:(NSArray *)targetViews inParentView:(UIView *)parentView offset:(CGSize)offset padding:(CGFloat)padding
+{
+    CGFloat totalWidth = [EasyLayout totalWidthForViews:targetViews padding:padding];
+    CGFloat startX = floorf((parentView.extSize.width - totalWidth)/2.0f);
+    
+    CGFloat xPos = startX + offset.width;
+    NSUInteger iterator = 0;
+    for (UIView *targetView in targetViews) {
+        
+        targetView.extQuickFrame.origin.x = floorf(xPos + iterator ? padding : 0.0f);
+        targetView.extQuickFrame.origin.y = offset.height;
+        
+        xPos = targetView.extTerminus.x;
+        iterator++;
+    }
+
+}
+
 + (void)centerView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset {
     targetView.extOrigin = CGPointMake(parentView.extHalfSize.width-targetView.extHalfSize.width+offset.width,
                                        parentView.extHalfSize.height-targetView.extHalfSize.height+offset.height);
@@ -280,6 +298,20 @@
         
     }
     return lowestView;
+}
+
++ (CGFloat)totalWidthForViews:(NSArray *)views padding:(CGFloat)padding
+{
+    CGFloat total = 0.0f;
+    NSUInteger iterateration = 0;
+    for (UIView *view in views) {
+        
+        total += (view.extSize.width + (iterateration ? padding : 0.0f));
+        
+        iterateration++;
+    }
+    
+    return total;
 }
 
 @end

@@ -27,6 +27,7 @@
 @interface EasyLayout : NSObject
 
 + (void)topCenterView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
++ (void)topCenterViews:(NSArray *)targetViews inParentView:(UIView *)parentView offset:(CGSize)offset padding:(CGFloat)padding;
 + (void)bottomCenterView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
 
 + (void)centerView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
@@ -71,6 +72,7 @@
 
 @interface EasyLayout(Inspection)
 + (UIView *)lowestViewFromArray:(NSArray *)arrayOfViews ignoreZeroHeight:(BOOL)ignoreZeroHeight;
++ (CGFloat)totalWidthForViews:(NSArray *)views padding:(CGFloat)padding;
 @end
 
 typedef enum

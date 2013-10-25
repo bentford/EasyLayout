@@ -13,10 +13,13 @@
 		3509B9DB1819CEC80093F714 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9DA1819CEC80093F714 /* UIKit.framework */; };
 		3509B9DE1819CEC80093F714 /* libEasyLayoutLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3509B9C61819CEC80093F714 /* libEasyLayoutLibrary.a */; };
 		3509B9E41819CEC80093F714 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3509B9E21819CEC80093F714 /* InfoPlist.strings */; };
-		3509B9E61819CEC80093F714 /* EasyLayoutLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9E51819CEC80093F714 /* EasyLayoutLibraryTests.m */; };
 		3509B9F51819CF420093F714 /* ButtonMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9F01819CF420093F714 /* ButtonMaker.m */; };
 		3509B9F61819CF420093F714 /* EasyLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9F21819CF420093F714 /* EasyLayout.m */; };
 		3509B9F71819CF420093F714 /* QuickFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509B9F41819CF420093F714 /* QuickFrame.m */; };
+		3509BA0C1819D6E00093F714 /* EasyLayout.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3509B9F11819CF420093F714 /* EasyLayout.h */; };
+		3509BA0D1819D6E30093F714 /* QuickFrame.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3509B9F31819CF420093F714 /* QuickFrame.h */; };
+		3509BA0E1819D6E50093F714 /* ButtonMaker.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3509B9EF1819CF420093F714 /* ButtonMaker.h */; };
+		3509BA111819DC050093F714 /* InspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509BA101819DC050093F714 /* InspectorTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				3509BA0C1819D6E00093F714 /* EasyLayout.h in CopyFiles */,
+				3509BA0D1819D6E30093F714 /* QuickFrame.h in CopyFiles */,
+				3509BA0E1819D6E50093F714 /* ButtonMaker.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,13 +56,13 @@
 		3509B9DA1819CEC80093F714 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		3509B9E11819CEC80093F714 /* EasyLayoutLibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EasyLayoutLibraryTests-Info.plist"; sourceTree = "<group>"; };
 		3509B9E31819CEC80093F714 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3509B9E51819CEC80093F714 /* EasyLayoutLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyLayoutLibraryTests.m; sourceTree = "<group>"; };
 		3509B9EF1819CF420093F714 /* ButtonMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonMaker.h; sourceTree = "<group>"; };
 		3509B9F01819CF420093F714 /* ButtonMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonMaker.m; sourceTree = "<group>"; };
 		3509B9F11819CF420093F714 /* EasyLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyLayout.h; sourceTree = "<group>"; };
 		3509B9F21819CF420093F714 /* EasyLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyLayout.m; sourceTree = "<group>"; };
 		3509B9F31819CF420093F714 /* QuickFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickFrame.h; sourceTree = "<group>"; };
 		3509B9F41819CF420093F714 /* QuickFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickFrame.m; sourceTree = "<group>"; };
+		3509BA101819DC050093F714 /* InspectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,8 +143,8 @@
 		3509B9DF1819CEC80093F714 /* EasyLayoutLibraryTests */ = {
 			isa = PBXGroup;
 			children = (
-				3509B9E51819CEC80093F714 /* EasyLayoutLibraryTests.m */,
 				3509B9E01819CEC80093F714 /* Supporting Files */,
+				3509BA101819DC050093F714 /* InspectorTests.m */,
 			);
 			path = EasyLayoutLibraryTests;
 			sourceTree = "<group>";
@@ -243,7 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3509B9E61819CEC80093F714 /* EasyLayoutLibraryTests.m in Sources */,
+				3509BA111819DC050093F714 /* InspectorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
