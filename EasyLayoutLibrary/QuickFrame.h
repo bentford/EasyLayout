@@ -1,6 +1,6 @@
 //
 //  QuickFrame.h
-//  MakeItReal
+//  
 //
 //  Created by Ben Ford on 2/13/13.
 //  Copyright (c) 2013 Ben Ford
