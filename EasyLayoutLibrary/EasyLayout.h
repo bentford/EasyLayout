@@ -42,7 +42,10 @@
 + (void)positionView:(UIView *)targetView toRightAndVerticalCenterOfView:(UIView *)siblingView offset:(CGSize)offset;
 + (void)positionView:(UIView *)targetView toRightOfView:(UIView *)siblingView offset:(CGSize)offset;
 
++ (void)positionView:(UIView *)targetView atViewCenter:(UIView *)siblingView offset:(CGSize)offset;
 + (void)positionView:(UIView *)targetView atView:(UIView *)siblingView offset:(CGSize)offset;
+
++ (void)positionViews:(NSArray *)targetViews belowViews:(NSArray *)siblingViews offset:(CGSize)offset;
 
 + (void)positionView:(UIView *)targetView belowView:(UIView *)siblingView offset:(CGSize)offset;
 + (void)positionView:(UIView *)targetView belowViews:(NSArray *)siblingViews offset:(CGSize)offset;
@@ -81,6 +84,14 @@ typedef enum
     ELLineModeMulti,
 } ELLineMode;
 
+@interface EasyLayout(TextField)
++ (void)sizeTextFieldHeight:(UITextField *)textField offset:(CGFloat)offset;
+@end
+
 @interface EasyLayout(Label)
 + (void)sizeLabel:(UILabel *)label mode:(ELLineMode)lineMode maxWidth:(CGFloat)maxWidth;
+@end
+
+@interface EasyLayout(Button)
++ (void)sizeButton:(UIButton *)button mode:(ELLineMode)lineMode maxWidth:(CGFloat)maxWidth;
 @end

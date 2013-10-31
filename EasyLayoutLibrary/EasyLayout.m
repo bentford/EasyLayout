@@ -149,9 +149,24 @@
     
 }
 
++ (void)positionView:(UIView *)targetView atViewCenter:(UIView *)siblingView offset:(CGSize)offset
+{
+    targetView.center = CGPointMake(siblingView.center.x+offset.width, siblingView.center.y+offset.height);
+}
+
 + (void)positionView:(UIView *)targetView atView:(UIView *)siblingView offset:(CGSize)offset
 {
-    targetView.extOrigin = siblingView.extOrigin;
+    targetView.extOrigin = CGPointMake(siblingView.extOrigin.x+offset.width, siblingView.extOrigin.y+offset.height);
+}
+
++ (void)positionViews:(NSArray *)targetViews belowViews:(NSArray *)siblingViews offset:(CGSize)offset
+{
+    NSAssert([targetViews count] == [siblingViews count], @"Arrays must be equal in count");
+    
+    for (UIView *targetView in targetViews) {
+        NSUInteger index = [targetViews indexOfObject:targetView];
+        [EasyLayout positionView:targetView belowView:siblingViews[index] offset:offset];
+    }
 }
 
 + (void)positionView:(UIView *)targetView belowView:(UIView *)siblingView offset:(CGSize)offset {
@@ -440,6 +455,28 @@
 }
 
 #pragma mark -
+@end
+
+@implementation EasyLayout(Button)
++ (void)sizeButton:(UIButton *)button mode:(ELLineMode)lineMode maxWidth:(CGFloat)maxWidth
+{
+    switch (lineMode) {
+        case ELLineModeSingle:
+            button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+            button.titleLabel.numberOfLines = 1;
+            break;
+        case ELLineModeMulti:
+            button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            // zero indicates unlimited lines allowed
+            button.titleLabel.numberOfLines = 0;
+            break;
+    }
+    
+    if (button.titleLabel.attributedText != nil)
+        button.extSize = [EasyLayout sizeAttributedText:button.titleLabel.attributedText mode:lineMode maxWidth:maxWidth];
+    else
+        button.extSize = [EasyLayout sizeText:button.titleLabel.text font:button.titleLabel.font mode:lineMode maxWidth:maxWidth];
+}
 @end
 
 @implementation EasyLayout(TextField)

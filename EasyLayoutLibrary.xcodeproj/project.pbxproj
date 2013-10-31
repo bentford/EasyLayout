@@ -20,6 +20,7 @@
 		3509BA0D1819D6E30093F714 /* QuickFrame.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3509B9F31819CF420093F714 /* QuickFrame.h */; };
 		3509BA0E1819D6E50093F714 /* ButtonMaker.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3509B9EF1819CF420093F714 /* ButtonMaker.h */; };
 		3509BA111819DC050093F714 /* InspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509BA101819DC050093F714 /* InspectorTests.m */; };
+		356B50881822CD3A00318DF1 /* SizeButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 356B50871822CD3A00318DF1 /* SizeButtonTests.m */; };
 		35817A0F181ACBA00073EC40 /* CenterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 35817A0E181ACBA00073EC40 /* CenterViewTests.m */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		3509B9F31819CF420093F714 /* QuickFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickFrame.h; sourceTree = "<group>"; };
 		3509B9F41819CF420093F714 /* QuickFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickFrame.m; sourceTree = "<group>"; };
 		3509BA101819DC050093F714 /* InspectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorTests.m; sourceTree = "<group>"; };
+		356B50871822CD3A00318DF1 /* SizeButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SizeButtonTests.m; sourceTree = "<group>"; };
 		35817A0E181ACBA00073EC40 /* CenterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterViewTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,6 +150,7 @@
 				3509B9E01819CEC80093F714 /* Supporting Files */,
 				3509BA101819DC050093F714 /* InspectorTests.m */,
 				35817A0E181ACBA00073EC40 /* CenterViewTests.m */,
+				356B50871822CD3A00318DF1 /* SizeButtonTests.m */,
 			);
 			path = EasyLayoutLibraryTests;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 			files = (
 				3509BA111819DC050093F714 /* InspectorTests.m in Sources */,
 				35817A0F181ACBA00073EC40 /* CenterViewTests.m in Sources */,
+				356B50881822CD3A00318DF1 /* SizeButtonTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
