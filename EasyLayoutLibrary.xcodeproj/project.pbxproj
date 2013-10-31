@@ -22,6 +22,7 @@
 		3509BA111819DC050093F714 /* InspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3509BA101819DC050093F714 /* InspectorTests.m */; };
 		356B50881822CD3A00318DF1 /* SizeButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 356B50871822CD3A00318DF1 /* SizeButtonTests.m */; };
 		356B508D1822D82000318DF1 /* ButtonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 356B508C1822D82000318DF1 /* ButtonLabel.m */; };
+		356B508E1822D90100318DF1 /* ButtonLabel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 356B508B1822D82000318DF1 /* ButtonLabel.h */; };
 		35817A0F181ACBA00073EC40 /* CenterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 35817A0E181ACBA00073EC40 /* CenterViewTests.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				356B508E1822D90100318DF1 /* ButtonLabel.h in CopyFiles */,
 				3509BA0C1819D6E00093F714 /* EasyLayout.h in CopyFiles */,
 				3509BA0D1819D6E30093F714 /* QuickFrame.h in CopyFiles */,
 				3509BA0E1819D6E50093F714 /* ButtonMaker.h in CopyFiles */,
