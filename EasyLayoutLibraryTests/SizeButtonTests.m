@@ -29,8 +29,6 @@
 
 - (void)testSizeButton
 {
-
-
     UILabel *label = [[UILabel alloc] init];
     label.text = @"This is a title";
     [EasyLayout sizeLabel:label mode:ELLineModeSingle maxWidth:200.0f];
