@@ -425,7 +425,7 @@
             break;
     }
     
-    return CGSizeMake(ceilf(textSize.width), ceilf(textSize.height));
+    return CGSizeMake(ceilf(textSize.width), ceilf(textSize.height)+2.0f);
 }
 
 + (CGSize)sizeText:(NSString *)text font:(UIFont *)font linebreakMode:(NSLineBreakMode)linebreakMode constrainedToSize:(CGSize)constrainedToSize
