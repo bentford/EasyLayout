@@ -410,9 +410,9 @@
     switch (linebreakMode) {
         case NSLineBreakByWordWrapping:
         case NSLineBreakByCharWrapping:
-            textSize = [attributedText boundingRectWithSize:constrainedToSize
-                                                    options:NSStringDrawingUsesLineFragmentOrigin
-                                                    context:nil].size;
+                textSize = [attributedText boundingRectWithSize:constrainedToSize
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                              context:nil].size;
             break;
             
         case NSLineBreakByClipping:
@@ -434,20 +434,34 @@
     switch (linebreakMode) {
         case NSLineBreakByWordWrapping:
         case NSLineBreakByCharWrapping:
-            textSize = [text boundingRectWithSize:constrainedToSize
-                                          options:NSStringDrawingUsesLineFragmentOrigin
-                                       attributes:@{NSFontAttributeName:font,NSKernAttributeName:@(-1.0f)}
-                                          context:nil].size;
+            if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+                textSize = [text boundingRectWithSize:constrainedToSize
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{NSFontAttributeName:font}
+                                              context:nil].size;
+            else
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+                textSize = [text sizeWithFont:font constrainedToSize:constrainedToSize
+                                lineBreakMode:linebreakMode];
+#pragma clang diagnostic pop
             break;
             
         case NSLineBreakByClipping:
         case NSLineBreakByTruncatingHead:
         case NSLineBreakByTruncatingMiddle:
         case NSLineBreakByTruncatingTail:
-            textSize = [text boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
-                                          options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
-                                       attributes:@{NSFontAttributeName:font}
-                                          context:nil].size;
+            if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+                textSize = [text boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
+                                              options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{NSFontAttributeName:font}
+                                              context:nil].size;
+            else
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+                textSize = [text sizeWithFont:font forWidth:constrainedToSize.width
+                                lineBreakMode:linebreakMode];
+#pragma clang diagnostic pop
             break;
     }
     

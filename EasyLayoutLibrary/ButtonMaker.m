@@ -110,19 +110,34 @@
     switch (linebreakMode) {
         case NSLineBreakByWordWrapping:
         case NSLineBreakByCharWrapping:
-            textSize = [text boundingRectWithSize:constrainedToSize
-                                          options:NSStringDrawingUsesLineFragmentOrigin
-                                       attributes:@{NSFontAttributeName:button.titleLabel.font}
-                                          context:nil].size;
+            if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+                textSize = [text boundingRectWithSize:constrainedToSize
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{NSFontAttributeName:button.titleLabel.font}
+                                              context:nil].size;
+            else
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+                textSize = [text sizeWithFont:button.titleLabel.font constrainedToSize:constrainedToSize
+                                lineBreakMode:linebreakMode];
+#pragma clang diagnostic pop
+            
             break;
         case NSLineBreakByClipping:
         case NSLineBreakByTruncatingHead:
         case NSLineBreakByTruncatingMiddle:
         case NSLineBreakByTruncatingTail:
-            textSize = [text boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
-                                          options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
-                                       attributes:@{NSFontAttributeName:button.titleLabel.font}
-                                          context:nil].size;
+            if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+                textSize = [text boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
+                                              options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{NSFontAttributeName:button.titleLabel.font}
+                                              context:nil].size;
+            else
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+                textSize = [text sizeWithFont:button.titleLabel.font forWidth:constrainedToSize.width
+                                lineBreakMode:linebreakMode];
+#pragma clang diagnostic pop            
             break;
     }
     
