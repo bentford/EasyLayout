@@ -18,6 +18,11 @@
 
 @property (nonatomic, readonly) QuickFrame *extQuickFrame;
 
+@property (nonatomic, assign) CGFloat extWidth;
+@property (nonatomic, assign) CGFloat extHeight;
+@property (nonatomic, assign) CGFloat extX;
+@property (nonatomic, assign) CGFloat extY;
+
 @property (nonatomic, readonly) NSString *extBoundsString;
 @property (nonatomic, readonly) NSString *extFrameString;
 

@@ -9,6 +9,46 @@
 
 @implementation UIView(EasyLayoutMethods)
 
+- (CGFloat)extWidth
+{
+    return self.extSize.width;
+}
+
+- (void)setExtWidth:(CGFloat)extWidth
+{
+    self.extSize = CGSizeMake(extWidth, self.extSize.height);
+}
+
+- (CGFloat)extHeight
+{
+    return self.extSize.width;
+}
+
+- (void)setExtHeight:(CGFloat)extHeight
+{
+    self.extSize = CGSizeMake(self.extSize.width, extHeight);
+}
+
+- (void)setExtX:(CGFloat)extX
+{
+    self.extOrigin = CGPointMake(extX, self.extOrigin.y);
+}
+
+- (CGFloat)extX
+{
+    return self.extOrigin.x;
+}
+
+- (void)setExtY:(CGFloat)extY
+{
+    self.extOrigin = CGPointMake(self.extOrigin.x, extY);
+}
+
+- (CGFloat)extY
+{
+    return self.extOrigin.y;
+}
+
 - (void)setExtOrigin:(CGPoint)extOrigin {
     self.frame = CGRectMake(extOrigin.x, extOrigin.y, self.frame.size.width, self.frame.size.height);
 }
