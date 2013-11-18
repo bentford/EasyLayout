@@ -21,7 +21,7 @@
 
 - (CGFloat)extHeight
 {
-    return self.extSize.width;
+    return self.extSize.height;
 }
 
 - (void)setExtHeight:(CGFloat)extHeight
