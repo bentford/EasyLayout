@@ -14,7 +14,7 @@
 {
     UIButton *newButton = [ButtonMaker textButtonWithText:title
                                                      font:[UIFont systemFontOfSize:25.0f] color:[UIColor colorWithRed:27.0f/255.0f green:119.0f/255.0f blue:255.0f/255.0f alpha:1.0f]
-                                          normalImageName:nil selectedImageName:nil];
+                                          normalImage:nil selectedImage:nil];
     
     [newButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
@@ -33,12 +33,9 @@
     return newButton;
 }
 
-+ (UIButton *)textButtonWithText:(NSString *)text font:(UIFont *)font color:(UIColor *)color normalImageName:(NSString *)normalImageName selectedImageName:(NSString *)selectedImageName
++ (UIButton *)textButtonWithText:(NSString *)text font:(UIFont *)font color:(UIColor *)color
+                     normalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage
 {
-    UIImage *normalImage = [UIImage imageNamed:normalImageName];
-    UIImage *selectedImage = [UIImage imageNamed:selectedImageName];
-    
-    
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [newButton setTitleColor:color forState:UIControlStateNormal];
