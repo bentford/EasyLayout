@@ -23,7 +23,9 @@
 		356B50881822CD3A00318DF1 /* SizeButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 356B50871822CD3A00318DF1 /* SizeButtonTests.m */; };
 		356B508D1822D82000318DF1 /* ButtonLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 356B508C1822D82000318DF1 /* ButtonLabel.m */; };
 		356B508E1822D90100318DF1 /* ButtonLabel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 356B508B1822D82000318DF1 /* ButtonLabel.h */; };
+		35795059187F585500E57903 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35795058187F585500E57903 /* CoreText.framework */; };
 		35817A0F181ACBA00073EC40 /* CenterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 35817A0E181ACBA00073EC40 /* CenterViewTests.m */; };
+		35AC7FAC187F56560038BAC0 /* SizeAttributedTextTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AC7FAB187F56560038BAC0 /* SizeAttributedTextTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +73,9 @@
 		356B50871822CD3A00318DF1 /* SizeButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SizeButtonTests.m; sourceTree = "<group>"; };
 		356B508B1822D82000318DF1 /* ButtonLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonLabel.h; sourceTree = "<group>"; };
 		356B508C1822D82000318DF1 /* ButtonLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonLabel.m; sourceTree = "<group>"; };
+		35795058187F585500E57903 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		35817A0E181ACBA00073EC40 /* CenterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterViewTests.m; sourceTree = "<group>"; };
+		35AC7FAB187F56560038BAC0 /* SizeAttributedTextTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SizeAttributedTextTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35795059187F585500E57903 /* CoreText.framework in Frameworks */,
 				3509B9D81819CEC80093F714 /* XCTest.framework in Frameworks */,
 				3509B9DE1819CEC80093F714 /* libEasyLayoutLibrary.a in Frameworks */,
 				3509B9DB1819CEC80093F714 /* UIKit.framework in Frameworks */,
@@ -120,6 +125,7 @@
 		3509B9C81819CEC80093F714 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35795058187F585500E57903 /* CoreText.framework */,
 				3509B9C91819CEC80093F714 /* Foundation.framework */,
 				3509B9D71819CEC80093F714 /* XCTest.framework */,
 				3509B9DA1819CEC80093F714 /* UIKit.framework */,
@@ -158,6 +164,7 @@
 				3509BA101819DC050093F714 /* InspectorTests.m */,
 				35817A0E181ACBA00073EC40 /* CenterViewTests.m */,
 				356B50871822CD3A00318DF1 /* SizeButtonTests.m */,
+				35AC7FAB187F56560038BAC0 /* SizeAttributedTextTest.m */,
 			);
 			path = EasyLayoutLibraryTests;
 			sourceTree = "<group>";
@@ -266,6 +273,7 @@
 				3509BA111819DC050093F714 /* InspectorTests.m in Sources */,
 				35817A0F181ACBA00073EC40 /* CenterViewTests.m in Sources */,
 				356B50881822CD3A00318DF1 /* SizeButtonTests.m in Sources */,
+				35AC7FAC187F56560038BAC0 /* SizeAttributedTextTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
