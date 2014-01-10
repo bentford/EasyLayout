@@ -148,12 +148,29 @@
         
         previousView = targetView;
     }
-
 }
 
 + (void)centerView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset {
     targetView.extOrigin = CGPointMake(parentView.extHalfSize.width-targetView.extHalfSize.width+offset.width,
                                        parentView.extHalfSize.height-targetView.extHalfSize.height+offset.height);
+}
+
++ (void)centerViews:(NSArray *)targetViews inParentView:(UIView *)parentView offset:(CGSize)offset padding:(CGFloat)padding
+{
+    CGFloat totalWidth = [EasyLayout totalWidthForViews:targetViews padding:padding];
+    CGFloat startX = floorf((parentView.extSize.width - totalWidth)/2.0f);
+    
+    CGFloat xPos = startX + offset.width;
+    UIView *previousView = nil;
+    for (UIView *targetView in targetViews) {
+        if (!previousView)
+            targetView.extOrigin = CGPointMake(xPos,
+                                               parentView.extHalfSize.height-targetView.extHalfSize.height+offset.height);
+        else
+            [EasyLayout positionView:targetView toRightOfView:previousView offset:CGSizeMake(padding, 0.0f)];
+        
+        previousView = targetView;
+    }
 }
 
 + (void)rightCenterView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset {
@@ -463,6 +480,7 @@
 + (CGSize)sizeAttributedText:(NSAttributedString *)attributedText linebreakMode:(NSLineBreakMode)linebreakMode
            constrainedToSize:(CGSize)constrainedToSize
 {
+    
     CGSize textSize;
     switch (linebreakMode) {
         case NSLineBreakByWordWrapping:
