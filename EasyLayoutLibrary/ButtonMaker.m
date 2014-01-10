@@ -26,7 +26,7 @@
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [newButton setImage:normalImage forState:UIControlStateNormal];
     if (selectedImage != nil)
-        [newButton setImage:selectedImage forState:UIControlStateNormal];
+        [newButton setImage:selectedImage forState:UIControlStateHighlighted];
     
     newButton.frame = CGRectMake(0.0f, 0.0f, normalImage.size.width, normalImage.size.height);
     
