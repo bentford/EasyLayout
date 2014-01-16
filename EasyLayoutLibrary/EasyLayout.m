@@ -342,13 +342,31 @@
 
 + (void)positionView:(UIView *)targetView inbetweenVerticallyFirstView:(UIView *)firstView secondView:(UIView *)secondView offset:(CGSize)offset
 {
-    CGFloat midYPosition;
-    if (firstView.extTerminus.x > secondView.extTerminus.x)
-        midYPosition = secondView.extTerminus.y - firstView.extTerminus.y;
-    else
-        midYPosition = firstView.extTerminus.y - secondView.extTerminus.y;
+    CGFloat yPosition;
+    if (firstView.extTerminus.y < secondView.extY) {
+        CGFloat verticalSeparation = secondView.extY - firstView.extTerminus.y;
+        yPosition = ceilf(verticalSeparation/2.0f) + firstView.extTerminus.y;
+    } else {
+        CGFloat verticalSeparation = firstView.extY - secondView.extTerminus.y;
+        yPosition = ceilf(verticalSeparation/2.0f) + secondView.extTerminus.y;
+    }
     
-    targetView.extOrigin = CGPointMake(targetView.extOrigin.y, midYPosition);
+    targetView.extOrigin = CGPointMake(targetView.extOrigin.x, yPosition + offset.height);
+}
+
++ (void)centerView:(UIView *)targetView inParentView:(UIView *)parentView
+        inbetweenVerticallyFirstView:(UIView *)firstView secondView:(UIView *)secondView offset:(CGSize)offset
+{
+    CGFloat yPosition;
+    if (firstView.extTerminus.y < secondView.extY) {
+        CGFloat verticalSeparation = secondView.extY - firstView.extTerminus.y;
+        yPosition = ceilf(verticalSeparation/2.0f) + firstView.extTerminus.y;
+    } else {
+        CGFloat verticalSeparation = firstView.extY - secondView.extTerminus.y;
+        yPosition = ceilf(verticalSeparation/2.0f) + secondView.extTerminus.y;
+    }
+    
+    targetView.extOrigin = CGPointMake(parentView.extMedial.x-targetView.extHalfSize.width, yPosition + offset.height);
 }
 
 + (void)sizeButton:(UIButton *)button matchHeightOfView:(UIView *)view

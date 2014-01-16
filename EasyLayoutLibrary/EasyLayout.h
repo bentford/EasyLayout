@@ -40,6 +40,9 @@
 + (void)centerView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
 + (void)centerViews:(NSArray *)targetViews inParentView:(UIView *)parentView offset:(CGSize)offset padding:(CGFloat)padding;
 
++ (void)centerView:(UIView *)targetView inParentView:(UIView *)parentView
+inbetweenVerticallyFirstView:(UIView *)firstView secondView:(UIView *)secondView offset:(CGSize)offset;
+
 + (void)rightCenterView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
 + (void)leftCenterView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;
 + (void)bottomRightView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset;

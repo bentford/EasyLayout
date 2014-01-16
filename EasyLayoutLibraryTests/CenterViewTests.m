@@ -60,4 +60,26 @@
     XCTAssertEqual(two.extOrigin.x, 255.0f, @"incorrect origin: %1.2f", two.extOrigin.x);
 }
 
+- (void)testCenterViewInParentInbetweenVertically
+{
+    UIView *parent = [[UIView alloc] init];
+    parent.extSize = CGSizeMake(500.0f, 500.0f);
+    
+    UIView *first = [[UIView alloc] init];
+    first.extSize = CGSizeMake(10.0f, 10.0f);
+    first.extOrigin = CGPointMake(0.0f, 0.0f);
+    
+    UIView *second = [[UIView alloc] init];
+    second.extSize = CGSizeMake(100.0f, 100.0f);
+    second.extOrigin = CGPointMake(0.0f, 500.0f);
+    
+    UIView *targetView = [[UIView alloc] init];
+    targetView.extSize = CGSizeMake(100.0f, 100.0f);
+    
+    [EasyLayout centerView:targetView inParentView:parent inbetweenVerticallyFirstView:first secondView:second
+                    offset:CGSizeZero];
+    
+    XCTAssertEqual(targetView.extMedial.x, parent.extHalfSize.width, @"incorrect origin: %1.2f", targetView.extMedial.x);
+}
+
 @end
