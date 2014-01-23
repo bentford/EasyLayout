@@ -359,7 +359,17 @@
         inbetweenVerticallyFirstView:(UIView *)firstView secondView:(UIView *)secondView offset:(CGSize)offset
 {
     CGFloat yPosition;
-    if (firstView.extTerminus.y < secondView.extY) {
+    if (firstView == nil) {
+        
+        CGFloat verticalSeparation = secondView.extY;
+        yPosition = ceilf(verticalSeparation/2.0f);
+        
+    } else if (secondView == nil) {
+        
+        CGFloat verticalSeparation = parentView.extHeight - firstView.extTerminus.y;
+        yPosition = ceilf(verticalSeparation/2.0f) + firstView.extTerminus.y;
+        
+    } else if (firstView.extTerminus.y < secondView.extY) {
         CGFloat verticalSeparation = secondView.extY - firstView.extTerminus.y;
         yPosition = ceilf(verticalSeparation/2.0f) + firstView.extTerminus.y;
     } else {
