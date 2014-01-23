@@ -167,7 +167,8 @@
             targetView.extOrigin = CGPointMake(xPos,
                                                parentView.extHalfSize.height-targetView.extHalfSize.height+offset.height);
         else
-            [EasyLayout positionView:targetView toRightOfView:previousView offset:CGSizeMake(padding, 0.0f)];
+            [EasyLayout positionView:targetView toRightAndVerticalCenterOfView:previousView
+                              offset:CGSizeMake(padding, 0.0f)];
         
         previousView = targetView;
     }
