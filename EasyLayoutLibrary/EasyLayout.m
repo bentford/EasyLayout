@@ -362,19 +362,19 @@
     if (firstView == nil) {
         
         CGFloat verticalSeparation = secondView.extY;
-        yPosition = ceilf(verticalSeparation/2.0f);
+        yPosition = ceilf(verticalSeparation/2.0f) - targetView.extHalfSize.height;
         
     } else if (secondView == nil) {
         
         CGFloat verticalSeparation = parentView.extHeight - firstView.extTerminus.y;
-        yPosition = ceilf(verticalSeparation/2.0f) + firstView.extTerminus.y;
+        yPosition = ceilf(verticalSeparation/2.0f) + firstView.extTerminus.y - targetView.extHalfSize.height;
         
     } else if (firstView.extTerminus.y < secondView.extY) {
         CGFloat verticalSeparation = secondView.extY - firstView.extTerminus.y;
-        yPosition = ceilf(verticalSeparation/2.0f) + firstView.extTerminus.y;
+        yPosition = ceilf(verticalSeparation/2.0f) + firstView.extTerminus.y - targetView.extHalfSize.height;
     } else {
         CGFloat verticalSeparation = firstView.extY - secondView.extTerminus.y;
-        yPosition = ceilf(verticalSeparation/2.0f) + secondView.extTerminus.y;
+        yPosition = ceilf(verticalSeparation/2.0f) + secondView.extTerminus.y - targetView.extHalfSize.height;;
     }
     
     targetView.extOrigin = CGPointMake(parentView.extMedial.x-targetView.extHalfSize.width, yPosition + offset.height);
