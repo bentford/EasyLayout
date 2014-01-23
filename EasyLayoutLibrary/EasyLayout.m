@@ -370,13 +370,6 @@
     targetView.extOrigin = CGPointMake(parentView.extMedial.x-targetView.extHalfSize.width, yPosition + offset.height);
 }
 
-+ (void)sizeButton:(UIButton *)button matchHeightOfView:(UIView *)view
-{
-    CGFloat heightDifference = floorf(button.imageView.image.size.height - view.extSize.height);
-    button.extQuickFrame.size.height = view.extSize.height;
-    [button setImageEdgeInsets:UIEdgeInsetsMake(heightDifference, 0.0f, 0.0f, 0.0f)];
-}
-
 + (void)sizeView:(UIView *)targetView toParent:(UIView *)parentView edgeInsets:(UIEdgeInsets)edgeInsets
 {
     CGRect zeroOriginFrame = CGRectMake(0.0f, 0.0f, parentView.extSize.width, parentView.extSize.height);
@@ -387,6 +380,13 @@
 {
     CGRect zeroOriginFrame = CGRectMake(0.0f, 0.0f, parentView.extSize.width, parentView.extSize.height);
     targetView.frame = CGRectInset(zeroOriginFrame, insetSize.width, insetSize.height);
+}
+
++ (void)sizeButton:(UIButton *)button matchHeightOfView:(UIView *)view
+{
+    CGFloat heightDifference = floorf(button.imageView.image.size.height - view.extSize.height);
+    button.extQuickFrame.size.height = view.extSize.height;
+    [button setImageEdgeInsets:UIEdgeInsetsMake(heightDifference, 0.0f, 0.0f, 0.0f)];
 }
 
 @end
