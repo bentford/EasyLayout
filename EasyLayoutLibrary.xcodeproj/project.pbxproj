@@ -362,6 +362,7 @@
 		3509B9EA1819CEC80093F714 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/EasyLayoutLibrary.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EasyLayoutLibrary/EasyLayoutLibrary-Prefix.pch";
@@ -374,6 +375,7 @@
 		3509B9EB1819CEC80093F714 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/EasyLayoutLibrary.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EasyLayoutLibrary/EasyLayoutLibrary-Prefix.pch";
