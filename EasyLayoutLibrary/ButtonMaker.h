@@ -11,7 +11,12 @@
 @interface ButtonMaker : NSObject
 + (UIButton *)genericButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action;
 
-+ (UIButton *)outerButtonWithNormalImageName:(NSString *)normalImageName selectedImageName:(NSString *)selectedImageName transparentOuterArea:(CGSize)outerArea;
++ (UIButton *)outerButtonWithNormalImageName:(NSString *)normalImageName selectedImageName:(NSString *)selectedImageName
+                        transparentOuterArea:(CGSize)outerArea;
+
++ (UIButton *)outerButtonWithNormalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage
+                    transparentOuterArea:(CGSize)outerArea;
+
 + (UIButton *)plainButtonWithNormalImageName:(NSString *)normalImageName selectedImageName:(NSString *)selectedImageName;
 + (UIButton *)plainButtonWithNormalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage;
 + (UIButton *)textButtonWithText:(NSString *)text font:(UIFont *)font color:(UIColor *)color

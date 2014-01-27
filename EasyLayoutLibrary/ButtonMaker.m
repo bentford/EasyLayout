@@ -21,6 +21,17 @@
     return newButton;
 }
 
++ (UIButton *)outerButtonWithNormalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage
+                        transparentOuterArea:(CGSize)outerArea
+{
+    UIButton *newButton = [ButtonMaker plainButtonWithNormalImage:normalImage selectedImage:selectedImage];
+    newButton.frame = CGRectMake(0.0f, 0.0f,
+                                 newButton.frame.size.width + outerArea.width,
+                                 newButton.frame.size.height + outerArea.height);
+    
+    return newButton;
+}
+
 + (UIButton *)plainButtonWithNormalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage
 {
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
