@@ -93,12 +93,12 @@
 
 - (NSString *)extBoundsString
 {
-    return NSStringFromCGRect(self.frame);
+    return NSStringFromCGRect(self.bounds);
 }
 
 - (NSString *)extFrameString
 {
-    return NSStringFromCGRect(self.bounds);
+    return NSStringFromCGRect(self.frame);
 }
 
 @end
