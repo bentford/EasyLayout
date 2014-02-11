@@ -101,6 +101,16 @@
     return NSStringFromCGRect(self.frame);
 }
 
+- (NSString *)extTransformString
+{
+    return [NSString stringWithFormat:@"\n[%1.2f,%1.2f,%1.2f]\
+                                        \n[%1.2f,%1.2f,%1.2f]\
+                                        \n[%1.2f,%1.2f,%1.2f]",
+                                    self.transform.a, self.transform.b, 0.0f,
+                                    self.transform.c, self.transform.d, 0.0f,
+                                    self.transform.tx, self.transform.ty, 1.0f];
+}
+
 @end
 
 @implementation EasyLayout

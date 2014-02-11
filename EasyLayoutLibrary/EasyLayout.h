@@ -25,6 +25,7 @@
 
 @property (nonatomic, readonly) NSString *extBoundsString;
 @property (nonatomic, readonly) NSString *extFrameString;
+@property (nonatomic, readonly) NSString *extTransformString;
 
 - (void)extRemoveAllSubviews;
 @end
