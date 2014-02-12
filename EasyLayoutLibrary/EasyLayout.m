@@ -229,6 +229,26 @@
     }
 }
 
++ (void)distributeVerticallyViews:(NSArray *)targetViews inParentView:(UIView *)parentView offset:(CGSize)offset
+{
+    CGFloat totalHeight = [EasyLayout totalHeightForViews:targetViews padding:0.0f];
+    CGFloat emptySpace = (parentView.extSize.height - totalHeight);
+    CGFloat padding = floorf(emptySpace/([targetViews count] + 1));
+    
+    CGFloat yPos = padding + offset.height;
+    UIView *previousView = nil;
+    for (UIView *targetView in targetViews) {
+        if (!previousView)
+            targetView.extOrigin = CGPointMake(parentView.extHalfSize.width-targetView.extHalfSize.width+offset.width,
+                                               yPos);
+        else
+            [EasyLayout positionView:targetView belowView:previousView horizontallyCenterWithView:previousView
+                              offset:CGSizeMake(0.0f, padding)];
+        
+        previousView = targetView;
+    }
+}
+
 + (void)rightCenterView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset {
     targetView.extOrigin = CGPointMake(parentView.bounds.size.width-targetView.bounds.size.width+offset.width,
                                        parentView.extHalfSize.height-targetView.extHalfSize.height+offset.height);

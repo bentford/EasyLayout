@@ -45,6 +45,7 @@
                      offset:(CGSize)offset padding:(CGFloat)padding;
 
 + (void)distributeHorizontallyViews:(NSArray *)targetViews inParentView:(UIView *)parentView offset:(CGSize)offset;
++ (void)distributeVerticallyViews:(NSArray *)targetViews inParentView:(UIView *)parentView offset:(CGSize)offset;
 
 /**
  If firstView or secondView is nil the top of the screen or bottom of the screen will be used, respectively.
