@@ -189,6 +189,26 @@
     }
 }
 
++ (void)centerVerticalViews:(NSArray *)targetViews inParentView:(UIView *)parentView
+                     offset:(CGSize)offset padding:(CGFloat)padding
+{
+    CGFloat totalHeight = [EasyLayout totalHeightForViews:targetViews padding:padding];
+    CGFloat startY = floorf((parentView.extSize.height - totalHeight)/2.0f);
+    
+    CGFloat yPos = startY + offset.height;
+    UIView *previousView = nil;
+    for (UIView *targetView in targetViews) {
+        if (!previousView)
+            targetView.extOrigin = CGPointMake(parentView.extHalfSize.width-targetView.extHalfSize.width+offset.width,
+                                               yPos);
+        else
+            [EasyLayout positionView:targetView belowView:previousView horizontallyCenterWithView:previousView
+                              offset:CGSizeMake(0.0f, padding)];
+        
+        previousView = targetView;
+    }
+}
+
 + (void)distributeHorizontallyViews:(NSArray *)targetViews inParentView:(UIView *)parentView offset:(CGSize)offset
 {
     CGFloat totalWidth = [EasyLayout totalWidthForViews:targetViews padding:0.0f];
@@ -456,12 +476,26 @@
 + (CGFloat)totalWidthForViews:(NSArray *)views padding:(CGFloat)padding
 {
     CGFloat total = 0.0f;
-    NSUInteger iterateration = 0;
+    NSUInteger iteration = 0;
     for (UIView *view in views) {
         
-        total += (view.extSize.width + (iterateration ? padding : 0.0f));
+        total += (view.extSize.width + (iteration ? padding : 0.0f));
         
-        iterateration++;
+        iteration++;
+    }
+    
+    return total;
+}
+
++ (CGFloat)totalHeightForViews:(NSArray *)views padding:(CGFloat)padding
+{
+    CGFloat total = 0.0f;
+    NSUInteger iteration = 0;
+    for (UIView *view in views) {
+        
+        total += (view.extSize.height + (iteration ? padding : 0.0f));
+        
+        iteration++;
     }
     
     return total;
