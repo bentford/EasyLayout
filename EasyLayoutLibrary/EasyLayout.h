@@ -28,6 +28,7 @@
 @property (nonatomic, readonly) NSString *extTransformString;
 
 - (void)extRemoveAllSubviews;
+- (void)extAddSubviews:(NSArray *)subviews;
 @end
 
 @interface EasyLayout : NSObject

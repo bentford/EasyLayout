@@ -90,6 +90,11 @@
         [view removeFromSuperview];
 }
 
+- (void)extAddSubviews:(NSArray *)subviews
+{
+    for (UIView *view in subviews)
+        [self addSubview:view];
+}
 
 - (NSString *)extBoundsString
 {
