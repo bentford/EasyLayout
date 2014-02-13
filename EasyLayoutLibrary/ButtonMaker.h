@@ -19,8 +19,23 @@
 
 + (UIButton *)plainButtonWithNormalImageName:(NSString *)normalImageName selectedImageName:(NSString *)selectedImageName;
 + (UIButton *)plainButtonWithNormalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage;
-+ (UIButton *)textButtonWithText:(NSString *)text font:(UIFont *)font color:(UIColor *)color
-                     normalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage;
+
+
++ (UIButton *)textButtonWithText:(NSString *)text
+                            font:(UIFont *)font
+                 normalTextColor:(UIColor *)normalTextColor
+               selectedTextColor:(UIColor *)selectedTextColor
+                     normalImage:(UIImage *)normalImage
+                   selectedImage:(UIImage *)selectedImage
+                         padding:(CGSize)padding;
+
++ (UIButton *)textButtonWithText:(NSString *)text
+                            font:(UIFont *)font
+                 normalTextColor:(UIColor *)normalTextColor
+               selectedTextColor:(UIColor *)selectedTextColor
+                     normalImage:(UIImage *)normalImage
+                   selectedImage:(UIImage *)selectedImage
+                         minSize:(CGSize)minSize;
 
 + (void)setText:(NSString *)text forButton:(UIButton *)button maxSize:(CGSize)maxSize;
 + (void)setText:(NSString *)text forButton:(UIButton *)button maxWidth:(CGFloat)maxWidth;

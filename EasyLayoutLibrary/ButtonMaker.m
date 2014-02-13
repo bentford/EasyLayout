@@ -13,8 +13,12 @@
 + (UIButton *)genericButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action
 {
     UIButton *newButton = [ButtonMaker textButtonWithText:title
-                                                     font:[UIFont systemFontOfSize:25.0f] color:[UIColor colorWithRed:27.0f/255.0f green:119.0f/255.0f blue:255.0f/255.0f alpha:1.0f]
-                                          normalImage:nil selectedImage:nil];
+                                                     font:[UIFont systemFontOfSize:25.0f]
+                                          normalTextColor:[UIColor whiteColor]
+                                        selectedTextColor:[UIColor blackColor]
+                                          normalImage:nil
+                                            selectedImage:nil
+                           padding:CGSizeZero];
     
     [newButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
@@ -44,14 +48,24 @@
     return newButton;
 }
 
-+ (UIButton *)textButtonWithText:(NSString *)text font:(UIFont *)font color:(UIColor *)color
-                     normalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage
++ (UIButton *)textButtonWithText:(NSString *)text
+                            font:(UIFont *)font
+                           normalTextColor:(UIColor *)normalTextColor
+                         selectedTextColor:(UIColor *)selectedTextColor
+                     normalImage:(UIImage *)normalImage
+                   selectedImage:(UIImage *)selectedImage
+                         padding:(CGSize)padding
 {
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [newButton setTitleColor:color forState:UIControlStateNormal];
-    [newButton setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateHighlighted];
-    [newButton setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateDisabled];
+    // setup colors
+    [newButton setTitleColor:normalTextColor forState:UIControlStateNormal];
+    [newButton setTitleColor:selectedTextColor forState:UIControlStateSelected];
+    [newButton setTitleColor:selectedTextColor forState:UIControlStateHighlighted];
+    
+    [newButton setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateDisabled];
+    
+    // setup font
     newButton.titleLabel.font = font;
     
     // set images if they were specified
@@ -64,9 +78,50 @@
     // size button via text
     [ButtonMaker setText:text forButton:newButton maxWidth:CGFLOAT_MAX];
     
-    // override size with image if it was supplied
+    // determine minimum sizes
+    CGFloat largestHeight = MAX(newButton.frame.size.height, normalImage.size.height);
+    CGFloat largestWidth = MAX(newButton.frame.size.width, normalImage.size.width);
+    
+    newButton.frame = CGRectMake(0.0f, 0.0f, largestWidth+padding.width, largestHeight+padding.height);
+    
+    return newButton;
+}
+
++ (UIButton *)textButtonWithText:(NSString *)text
+                            font:(UIFont *)font
+                 normalTextColor:(UIColor *)normalTextColor
+               selectedTextColor:(UIColor *)selectedTextColor
+                     normalImage:(UIImage *)normalImage
+                   selectedImage:(UIImage *)selectedImage
+                         minSize:(CGSize)minSize
+{
+    UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    // setup colors
+    [newButton setTitleColor:normalTextColor forState:UIControlStateNormal];
+    [newButton setTitleColor:selectedTextColor forState:UIControlStateSelected];
+    [newButton setTitleColor:selectedTextColor forState:UIControlStateHighlighted];
+    
+    [newButton setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateDisabled];
+    
+    // setup font
+    newButton.titleLabel.font = font;
+    
+    // set images if they were specified
     if (normalImage != nil)
-        newButton.frame = CGRectMake(0.0f, 0.0f, normalImage.size.width, normalImage.size.height);
+        [newButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+    
+    if (selectedImage != nil)
+        [newButton setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
+    
+    // size button via text
+    [ButtonMaker setText:text forButton:newButton maxWidth:CGFLOAT_MAX];
+    
+    // determine minimum sizes
+    CGFloat largestHeight = MAX(MAX(newButton.frame.size.height, normalImage.size.height), minSize.height);
+    CGFloat largestWidth = MAX(MAX(newButton.frame.size.width, normalImage.size.width), minSize.width);
+    
+    newButton.frame = CGRectMake(0.0f, 0.0f, largestWidth, largestHeight);
     
     return newButton;
 }
@@ -105,47 +160,54 @@
     [self setText:text forButton:button linebreakMode:NSLineBreakByTruncatingTail constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
 }
 
-+ (void)setText:(NSString *)text forButton:(UIButton *)button linebreakMode:(NSLineBreakMode)linebreakMode constrainedToSize:(CGSize)constrainedToSize
++ (void)setText:(NSString *)text forButton:(UIButton *)button linebreakMode:(NSLineBreakMode)linebreakMode
+                constrainedToSize:(CGSize)constrainedToSize
 {
     // the normalized text is used to calculate on something if incoming text was blank
     BOOL containsText = (text != nil && [[text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] > 0);
     NSString *normalizedText = containsText ? text : @"MMM";
     
-    // NewHouse and Futura fonts have a bug so pad them in the end
-    normalizedText = [NSString stringWithFormat:@"%@ ", normalizedText];
-    
     CGSize textSize;
     switch (linebreakMode) {
         case NSLineBreakByWordWrapping:
         case NSLineBreakByCharWrapping:
-            if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
-                textSize = [text boundingRectWithSize:constrainedToSize
+
+            // iOS7 and up
+            if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+                textSize = [normalizedText boundingRectWithSize:constrainedToSize
                                               options:NSStringDrawingUsesLineFragmentOrigin
                                            attributes:@{NSFontAttributeName:button.titleLabel.font}
-                                              context:nil].size;
-            else
+                    
+                                                        context:nil].size;
+                
+            // iOS6 and below
+            } else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-                textSize = [text sizeWithFont:button.titleLabel.font constrainedToSize:constrainedToSize
+                textSize = [normalizedText sizeWithFont:button.titleLabel.font constrainedToSize:constrainedToSize
                                 lineBreakMode:linebreakMode];
 #pragma clang diagnostic pop
+            }
             
             break;
         case NSLineBreakByClipping:
         case NSLineBreakByTruncatingHead:
         case NSLineBreakByTruncatingMiddle:
         case NSLineBreakByTruncatingTail:
-            if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+            // iOS7 and up
+            if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
                 textSize = [text boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
                                               options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
                                            attributes:@{NSFontAttributeName:button.titleLabel.font}
                                               context:nil].size;
-            else
+            // iOS6 and below
+            } else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
                 textSize = [text sizeWithFont:button.titleLabel.font forWidth:constrainedToSize.width
                                 lineBreakMode:linebreakMode];
-#pragma clang diagnostic pop            
+#pragma clang diagnostic pop  
+            }
             break;
     }
     
