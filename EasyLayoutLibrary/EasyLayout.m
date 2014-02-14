@@ -345,6 +345,23 @@
                                        siblingView.extTerminus.y+offset.height);
 }
 
++ (void)positionViews:(NSArray *)targetViews belowView:(UIView *)siblingView
+        horizontallyCenterInParent:(UIView *)parentView offset:(CGSize)offset padding:(CGFloat)padding
+{
+    CGFloat totalWidth = [EasyLayout totalWidthForViews:targetViews padding:padding];
+    CGFloat startX = floorf((parentView.extSize.width - totalWidth)/2.0f);
+    
+    CGFloat xPos = startX + offset.width;
+    UIView *previousView = nil;
+    for (UIView *targetView in targetViews) {
+        if (!previousView)
+            targetView.extOrigin = CGPointMake(xPos, siblingView.extTerminus.y+offset.height);
+        else
+            [EasyLayout positionView:targetView toRightOfView:previousView offset:CGSizeMake(padding, 0.0f)];
+        
+        previousView = targetView;
+    }
+}
 
 + (void)positionView:(UIView *)targetView aboveView:(UIView *)siblingView offset:(CGSize)offset
 {

@@ -74,6 +74,9 @@
 + (void)positionView:(UIView *)targetView belowView:(UIView *)siblingView horizontallyCenterWithView:(UIView *)centerInView offset:(CGSize)offset;
 + (void)positionView:(UIView *)targetView belowView:(UIView *)siblingView horizontallyCenterInParent:(UIView *)centerInParent offset:(CGSize)offset;
 
++ (void)positionViews:(NSArray *)targetViews belowView:(UIView *)siblingView
+        horizontallyCenterInParent:(UIView *)centerInParent offset:(CGSize)offset padding:(CGFloat)padding;
+
 + (void)positionView:(UIView *)targetView aboveView:(UIView *)siblingView offset:(CGSize)offset;
 + (void)positionView:(UIView *)targetView aboveView:(UIView *)siblingView horizontallyCenterWithView:(UIView *)centerInView offset:(CGSize)offset;
 + (void)positionView:(UIView *)targetView aboveView:(UIView *)siblingView horizontallyCenterInParent:(UIView *)centerInParent offset:(CGSize)offset;
