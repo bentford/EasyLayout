@@ -10,6 +10,9 @@
 #import "ButtonMaker.h"
 
 @implementation ButtonMaker
+
+#pragma mark - Generic Button for Testing
+
 + (UIButton *)genericButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action
 {
     UIButton *newButton = [ButtonMaker textButtonWithText:title
@@ -24,6 +27,11 @@
     
     return newButton;
 }
+
+#pragma mark -
+
+#pragma mark Image Only Buttons
+
 
 + (UIButton *)outerButtonWithNormalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage
                         transparentOuterArea:(CGSize)outerArea
@@ -47,6 +55,10 @@
     
     return newButton;
 }
+
+#pragma mark -
+
+#pragma mark Text Buttons
 
 + (UIButton *)textButtonWithText:(NSString *)text
                             font:(UIFont *)font
@@ -89,11 +101,11 @@
 
 + (UIButton *)textButtonWithText:(NSString *)text
                             font:(UIFont *)font
-                 normalTextColor:(UIColor *)normalTextColor
-               selectedTextColor:(UIColor *)selectedTextColor
-                     normalImage:(UIImage *)normalImage
-                   selectedImage:(UIImage *)selectedImage
-                         minSize:(CGSize)minSize
+                           normalTextColor:(UIColor *)normalTextColor
+                         selectedTextColor:(UIColor *)selectedTextColor
+                               normalImage:(UIImage *)normalImage
+                             selectedImage:(UIImage *)selectedImage
+                                   minSize:(CGSize)minSize
 {
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -126,29 +138,85 @@
     return newButton;
 }
 
-+ (UIButton *)plainButtonWithNormalImageName:(NSString *)normalImageName selectedImageName:(NSString *)selectedImageName
+#pragma mark -
+
+#pragma mark Attributed Text Buttons
+
+
++ (UIButton *)textButtonWithAttributedText:(NSAttributedString *)attributedText
+                 normalTextColor:(UIColor *)normalTextColor
+               selectedTextColor:(UIColor *)selectedTextColor
+                     normalImage:(UIImage *)normalImage
+                   selectedImage:(UIImage *)selectedImage
+                         minSize:(CGSize)minSize
 {
-    UIImage *normalImage = [UIImage imageNamed:normalImageName];
-    UIImage *selectedImage = [UIImage imageNamed:selectedImageName];
-    
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [newButton setImage:normalImage forState:UIControlStateNormal];
+    
+    // setup colors
+    [newButton setTitleColor:normalTextColor forState:UIControlStateNormal];
+    [newButton setTitleColor:selectedTextColor forState:UIControlStateSelected];
+    [newButton setTitleColor:selectedTextColor forState:UIControlStateHighlighted];
+    
+    [newButton setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateDisabled];
+    
+    // set images if they were specified
+    if (normalImage != nil)
+        [newButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+    
     if (selectedImage != nil)
-        [newButton setImage:selectedImage forState:UIControlStateSelected];
+        [newButton setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
     
-    newButton.frame = CGRectMake(0.0f, 0.0f, normalImage.size.width, normalImage.size.height);
+    // size button via text
+    [ButtonMaker setAttributedText:attributedText forButton:newButton maxWidth:CGFLOAT_MAX];
+    
+    // determine minimum sizes
+    CGFloat largestHeight = MAX(MAX(newButton.frame.size.height, normalImage.size.height), minSize.height);
+    CGFloat largestWidth = MAX(MAX(newButton.frame.size.width, normalImage.size.width), minSize.width);
+    
+    newButton.frame = CGRectMake(0.0f, 0.0f, largestWidth, largestHeight);
     
     return newButton;
 }
 
-
-+ (UIButton *)outerButtonWithNormalImageName:(NSString *)normalImageName selectedImageName:(NSString *)selectedImageName transparentOuterArea:(CGSize)outerArea
++ (UIButton *)textButtonWithAttributedText:(NSAttributedString *)attributedText
+                 normalTextColor:(UIColor *)normalTextColor
+               selectedTextColor:(UIColor *)selectedTextColor
+                     normalImage:(UIImage *)normalImage
+                   selectedImage:(UIImage *)selectedImage
+                         padding:(CGSize)padding
 {
-    UIButton *newButton = [ButtonMaker plainButtonWithNormalImageName:normalImageName selectedImageName:selectedImageName];
-    newButton.frame = CGRectMake(0.0f, 0.0f, newButton.frame.size.width+outerArea.width, newButton.frame.size.height+outerArea.height);
+    UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    // setup colors
+    [newButton setTitleColor:normalTextColor forState:UIControlStateNormal];
+    [newButton setTitleColor:selectedTextColor forState:UIControlStateSelected];
+    [newButton setTitleColor:selectedTextColor forState:UIControlStateHighlighted];
+    
+    [newButton setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateDisabled];
+    
+    // set images if they were specified
+    if (normalImage != nil)
+        [newButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+    
+    if (selectedImage != nil)
+        [newButton setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
+    
+    // size button via text
+    [ButtonMaker setAttributedText:attributedText forButton:newButton maxWidth:CGFLOAT_MAX];
+    
+    // determine minimum sizes
+    CGFloat largestHeight = MAX(newButton.frame.size.height, normalImage.size.height);
+    CGFloat largestWidth = MAX(newButton.frame.size.width, normalImage.size.width);
+    
+    newButton.frame = CGRectMake(0.0f, 0.0f, largestWidth+padding.width, largestHeight+padding.height);
     
     return newButton;
 }
+
+#pragma mark -
+
+#pragma mark Setting Text on Buttons
+
 
 + (void)setText:(NSString *)text forButton:(UIButton *)button maxSize:(CGSize)maxSize
 {
@@ -157,7 +225,8 @@
 
 + (void)setText:(NSString *)text forButton:(UIButton *)button maxWidth:(CGFloat)maxWidth
 {
-    [self setText:text forButton:button linebreakMode:NSLineBreakByTruncatingTail constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
+    [self setText:text forButton:button linebreakMode:NSLineBreakByTruncatingTail
+            constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
 }
 
 + (void)setText:(NSString *)text forButton:(UIButton *)button linebreakMode:(NSLineBreakMode)linebreakMode
@@ -217,4 +286,47 @@
     button.frame = CGRectMake(button.frame.origin.x,button.frame.origin.y,textSize.width,textSize.height);
 }
 
++ (void)setAttributedText:(NSAttributedString *)text forButton:(UIButton *)button maxSize:(CGSize)maxSize
+{
+    [self setAttributedText:text forButton:button linebreakMode:NSLineBreakByWordWrapping constrainedToSize:maxSize];
+}
+
++ (void)setAttributedText:(NSAttributedString *)text forButton:(UIButton *)button maxWidth:(CGFloat)maxWidth
+{
+    [self setAttributedText:text forButton:button linebreakMode:NSLineBreakByTruncatingTail
+          constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)];
+}
+
++ (void)setAttributedText:(NSAttributedString *)attributedText
+                forButton:(UIButton *)button
+            linebreakMode:(NSLineBreakMode)linebreakMode
+        constrainedToSize:(CGSize)constrainedToSize
+{
+    
+    CGSize textSize;
+    switch (linebreakMode) {
+        case NSLineBreakByWordWrapping:
+        case NSLineBreakByCharWrapping:
+            textSize = [attributedText boundingRectWithSize:constrainedToSize
+                                                    options:NSStringDrawingUsesLineFragmentOrigin
+                                                    context:nil].size;
+            break;
+            
+        case NSLineBreakByClipping:
+        case NSLineBreakByTruncatingHead:
+        case NSLineBreakByTruncatingMiddle:
+        case NSLineBreakByTruncatingTail:
+            textSize = [attributedText boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
+                                                    options:NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
+                                                    context:nil].size;
+            break;
+    }
+    
+    textSize = CGSizeMake(ceilf(textSize.width), ceilf(textSize.height));
+    
+    [button setAttributedTitle:attributedText forState:UIControlStateNormal];
+    button.titleLabel.lineBreakMode = linebreakMode;
+    button.frame = CGRectMake(button.frame.origin.x, button.frame.origin.y, textSize.width, textSize.height);
+}
+#pragma mark -
 @end
