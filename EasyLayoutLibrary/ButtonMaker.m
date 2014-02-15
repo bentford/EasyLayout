@@ -143,21 +143,28 @@
 #pragma mark Attributed Text Buttons
 
 
-+ (UIButton *)textButtonWithAttributedText:(NSAttributedString *)attributedText
-                 normalTextColor:(UIColor *)normalTextColor
-               selectedTextColor:(UIColor *)selectedTextColor
-                     normalImage:(UIImage *)normalImage
-                   selectedImage:(UIImage *)selectedImage
++ (UIButton *)textButtonWithAttributedText:(NSString *)text
+                      normalTextAttributes:(NSDictionary *)normalTextAttributes
+                    selectedTextAttributes:(NSDictionary *)selectedTextAttributes
+                               normalImage:(UIImage *)normalImage
+                             selectedImage:(UIImage *)selectedImage
                          minSize:(CGSize)minSize
 {
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    // setup colors
-    [newButton setTitleColor:normalTextColor forState:UIControlStateNormal];
-    [newButton setTitleColor:selectedTextColor forState:UIControlStateSelected];
-    [newButton setTitleColor:selectedTextColor forState:UIControlStateHighlighted];
+    NSAttributedString *normalAttributedString = [[NSAttributedString alloc] initWithString:text
+                                                                                 attributes:normalTextAttributes];
     
-    [newButton setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateDisabled];
+    NSAttributedString *selectedAttributedString = [[NSAttributedString alloc] initWithString:text
+                                                                                   attributes:selectedTextAttributes];
+    
+    // build a disabled state
+    NSDictionary *disabledAttributes = @{NSKernAttributeName:normalTextAttributes[NSKernAttributeName],
+                                         NSFontAttributeName:normalTextAttributes[NSFontAttributeName],
+                                         NSForegroundColorAttributeName:[UIColor colorWithWhite:0.5f alpha:1.0f]};
+    
+    NSAttributedString *disabledAttributedString = [[NSAttributedString alloc] initWithString:text
+                                                                                   attributes:disabledAttributes];
     
     // set images if they were specified
     if (normalImage != nil)
@@ -167,7 +174,12 @@
         [newButton setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
     
     // size button via text
-    [ButtonMaker setAttributedText:attributedText forButton:newButton maxWidth:CGFLOAT_MAX];
+    [ButtonMaker setAttributedText:normalAttributedString forButton:newButton maxWidth:CGFLOAT_MAX];
+    
+    // set alternate state strings
+    [newButton setAttributedTitle:selectedAttributedString forState:UIControlStateSelected];
+    [newButton setAttributedTitle:selectedAttributedString forState:UIControlStateHighlighted];
+    [newButton setAttributedTitle:disabledAttributedString forState:UIControlStateDisabled];
     
     // determine minimum sizes
     CGFloat largestHeight = MAX(MAX(newButton.frame.size.height, normalImage.size.height), minSize.height);
@@ -178,21 +190,28 @@
     return newButton;
 }
 
-+ (UIButton *)textButtonWithAttributedText:(NSAttributedString *)attributedText
-                 normalTextColor:(UIColor *)normalTextColor
-               selectedTextColor:(UIColor *)selectedTextColor
++ (UIButton *)textButtonWithAttributedText:(NSString *)text
+                 normalTextAttributes:(NSDictionary *)normalTextAttributes
+               selectedTextAttributes:(NSDictionary *)selectedTextAttributes
                      normalImage:(UIImage *)normalImage
                    selectedImage:(UIImage *)selectedImage
                          padding:(CGSize)padding
 {
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    // setup colors
-    [newButton setTitleColor:normalTextColor forState:UIControlStateNormal];
-    [newButton setTitleColor:selectedTextColor forState:UIControlStateSelected];
-    [newButton setTitleColor:selectedTextColor forState:UIControlStateHighlighted];
+    NSAttributedString *normalAttributedString = [[NSAttributedString alloc] initWithString:text
+                                                                                 attributes:normalTextAttributes];
     
-    [newButton setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateDisabled];
+    NSAttributedString *selectedAttributedString = [[NSAttributedString alloc] initWithString:text
+                                                                                 attributes:selectedTextAttributes];
+    
+    // build a disabled state
+    NSDictionary *disabledAttributes = @{NSKernAttributeName:normalTextAttributes[NSKernAttributeName],
+                                         NSFontAttributeName:normalTextAttributes[NSFontAttributeName],
+                                         NSForegroundColorAttributeName:[UIColor colorWithWhite:0.5f alpha:1.0f]};
+                                         
+    NSAttributedString *disabledAttributedString = [[NSAttributedString alloc] initWithString:text
+                                                                                   attributes:disabledAttributes];
     
     // set images if they were specified
     if (normalImage != nil)
@@ -202,7 +221,12 @@
         [newButton setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
     
     // size button via text
-    [ButtonMaker setAttributedText:attributedText forButton:newButton maxWidth:CGFLOAT_MAX];
+    [ButtonMaker setAttributedText:normalAttributedString forButton:newButton maxWidth:CGFLOAT_MAX];
+    
+    // set alternate state strings
+    [newButton setAttributedTitle:selectedAttributedString forState:UIControlStateSelected];
+    [newButton setAttributedTitle:selectedAttributedString forState:UIControlStateHighlighted];
+    [newButton setAttributedTitle:disabledAttributedString forState:UIControlStateDisabled];
     
     // determine minimum sizes
     CGFloat largestHeight = MAX(newButton.frame.size.height, normalImage.size.height);

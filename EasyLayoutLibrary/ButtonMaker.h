@@ -43,12 +43,19 @@
 #pragma mark -
 
 #pragma mark Attributed Text Buttons
-+ (UIButton *)textButtonWithAttributedText:(NSAttributedString *)attributedText
-                           normalTextColor:(UIColor *)normalTextColor
-                         selectedTextColor:(UIColor *)selectedTextColor
++ (UIButton *)textButtonWithAttributedText:(NSString *)text
+                      normalTextAttributes:(NSDictionary *)normalTextAttributes
+                    selectedTextAttributes:(NSDictionary *)selectedTextAttributes
                                normalImage:(UIImage *)normalImage
                              selectedImage:(UIImage *)selectedImage
                                    minSize:(CGSize)minSize;
+
++ (UIButton *)textButtonWithAttributedText:(NSString *)text
+                      normalTextAttributes:(NSDictionary *)normalTextAttributes
+                    selectedTextAttributes:(NSDictionary *)selectedTextAttributes
+                               normalImage:(UIImage *)normalImage
+                             selectedImage:(UIImage *)selectedImage
+                                   padding:(CGSize)padding;
 #pragma mark -
 
 #pragma mark Setting Text on Buttons
