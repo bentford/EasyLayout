@@ -52,6 +52,14 @@
 
 /**
  @param textOffset Used to offset the text for fonts that do not vertically center.
+ 
+ Typographic bounds cause a line to appear uncentered.  This is the reason for the offset.
+ 
+ From CoreText documentation:
+   Image bounds represent the rectangle tightly enclosing the graphic shapes of the
+   glyphs actually appearing in the line. Typographic bounds include the height of
+   the ascenders in the font and the depth of its descenders, regardless of whether
+   those features appear in the glyphs in a given line.
  */
 + (UIButton *)textButtonWithAttributedText:(NSString *)text
                       normalTextAttributes:(NSDictionary *)normalTextAttributes
@@ -70,6 +78,14 @@
 
 /**
  @param textOffset Used to offset the text for fonts that do not vertically center.
+
+ Typographic bounds cause a line to appear uncentered.  This is the reason for the offset.
+ 
+ From CoreText documentation:
+   Image bounds represent the rectangle tightly enclosing the graphic shapes of the
+   glyphs actually appearing in the line. Typographic bounds include the height of
+   the ascenders in the font and the depth of its descenders, regardless of whether
+   those features appear in the glyphs in a given line.
  */
 + (UIButton *)textButtonWithAttributedText:(NSString *)text
                       normalTextAttributes:(NSDictionary *)normalTextAttributes
