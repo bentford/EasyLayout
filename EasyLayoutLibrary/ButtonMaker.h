@@ -48,14 +48,36 @@
                     selectedTextAttributes:(NSDictionary *)selectedTextAttributes
                                normalImage:(UIImage *)normalImage
                              selectedImage:(UIImage *)selectedImage
-                                   minSize:(CGSize)minSize;
+                                   minSize:(CGSize)minSize __deprecated;
+
+/**
+ @param textOffset Used to offset the text for fonts that do not vertically center.
+ */
++ (UIButton *)textButtonWithAttributedText:(NSString *)text
+                      normalTextAttributes:(NSDictionary *)normalTextAttributes
+                    selectedTextAttributes:(NSDictionary *)selectedTextAttributes
+                               normalImage:(UIImage *)normalImage
+                             selectedImage:(UIImage *)selectedImage
+                                   minSize:(CGSize)minSize
+                                textOffset:(CGSize)textOffset;
 
 + (UIButton *)textButtonWithAttributedText:(NSString *)text
                       normalTextAttributes:(NSDictionary *)normalTextAttributes
                     selectedTextAttributes:(NSDictionary *)selectedTextAttributes
                                normalImage:(UIImage *)normalImage
                              selectedImage:(UIImage *)selectedImage
-                                   padding:(CGSize)padding;
+                                   padding:(CGSize)padding __deprecated;
+
+/**
+ @param textOffset Used to offset the text for fonts that do not vertically center.
+ */
++ (UIButton *)textButtonWithAttributedText:(NSString *)text
+                      normalTextAttributes:(NSDictionary *)normalTextAttributes
+                    selectedTextAttributes:(NSDictionary *)selectedTextAttributes
+                               normalImage:(UIImage *)normalImage
+                             selectedImage:(UIImage *)selectedImage
+                                   padding:(CGSize)padding
+                                textOffset:(CGSize)textOffset;
 #pragma mark -
 
 #pragma mark Setting Text on Buttons

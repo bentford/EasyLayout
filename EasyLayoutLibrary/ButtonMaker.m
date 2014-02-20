@@ -8,6 +8,7 @@
 
 
 #import "ButtonMaker.h"
+#import "EasyLayout.h"
 
 @implementation ButtonMaker
 
@@ -144,13 +145,29 @@
 
 #pragma mark Attributed Text Buttons
 
++ (UIButton *)textButtonWithAttributedText:(NSString *)text
+                      normalTextAttributes:(NSDictionary *)normalTextAttributes
+                    selectedTextAttributes:(NSDictionary *)selectedTextAttributes
+                               normalImage:(UIImage *)normalImage
+                             selectedImage:(UIImage *)selectedImage
+                                   minSize:(CGSize)minSize
+{
+    return [ButtonMaker textButtonWithAttributedText:text
+                                normalTextAttributes:normalTextAttributes
+                              selectedTextAttributes:selectedTextAttributes
+                                         normalImage:normalImage
+                                       selectedImage:selectedImage
+                                             minSize:minSize
+                                          textOffset:CGSizeZero];
+}
 
 + (UIButton *)textButtonWithAttributedText:(NSString *)text
                       normalTextAttributes:(NSDictionary *)normalTextAttributes
                     selectedTextAttributes:(NSDictionary *)selectedTextAttributes
                                normalImage:(UIImage *)normalImage
                              selectedImage:(UIImage *)selectedImage
-                         minSize:(CGSize)minSize
+                                   minSize:(CGSize)minSize
+                                textOffset:(CGSize)textOffset
 {
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -189,8 +206,29 @@
     
     newButton.frame = CGRectMake(0.0f, 0.0f, largestWidth, largestHeight);
     
+    [EasyLayout centerView:newButton.titleLabel inParentView:newButton offset:textOffset];
+    
     return newButton;
 }
+
+
++ (UIButton *)textButtonWithAttributedText:(NSString *)text
+                      normalTextAttributes:(NSDictionary *)normalTextAttributes
+                    selectedTextAttributes:(NSDictionary *)selectedTextAttributes
+                               normalImage:(UIImage *)normalImage
+                             selectedImage:(UIImage *)selectedImage
+                                   padding:(CGSize)padding
+
+{
+    return [ButtonMaker textButtonWithAttributedText:text
+                         normalTextAttributes:normalTextAttributes
+                       selectedTextAttributes:selectedTextAttributes
+                                  normalImage:normalImage
+                                selectedImage:selectedImage
+                                      padding:padding textOffset:CGSizeZero];
+    
+}
+
 
 + (UIButton *)textButtonWithAttributedText:(NSString *)text
                  normalTextAttributes:(NSDictionary *)normalTextAttributes
@@ -198,6 +236,7 @@
                      normalImage:(UIImage *)normalImage
                    selectedImage:(UIImage *)selectedImage
                          padding:(CGSize)padding
+                      textOffset:(CGSize)textOffset
 {
     UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -235,6 +274,7 @@
     CGFloat largestWidth = MAX(newButton.frame.size.width, normalImage.size.width);
     
     newButton.frame = CGRectMake(0.0f, 0.0f, largestWidth+padding.width, largestHeight+padding.height);
+    [EasyLayout centerView:newButton.titleLabel inParentView:newButton offset:textOffset];
     
     return newButton;
 }
