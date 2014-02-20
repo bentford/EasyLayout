@@ -60,6 +60,10 @@
    glyphs actually appearing in the line. Typographic bounds include the height of
    the ascenders in the font and the depth of its descenders, regardless of whether
    those features appear in the glyphs in a given line.
+ 
+   For every font, glyph designers provide a set of measurements, called metrics, 
+   which describe the spacing around each glyph in the font. These metrics determine
+   glyph placement in a line. Line height is the total of ascent, descent, and leading.
  */
 + (UIButton *)textButtonWithAttributedText:(NSString *)text
                       normalTextAttributes:(NSDictionary *)normalTextAttributes
@@ -86,6 +90,10 @@
    glyphs actually appearing in the line. Typographic bounds include the height of
    the ascenders in the font and the depth of its descenders, regardless of whether
    those features appear in the glyphs in a given line.
+ 
+   For every font, glyph designers provide a set of measurements, called metrics,
+   which describe the spacing around each glyph in the font. These metrics determine
+   glyph placement in a line. Line height is the total of ascent, descent, and leading.
  */
 + (UIButton *)textButtonWithAttributedText:(NSString *)text
                       normalTextAttributes:(NSDictionary *)normalTextAttributes
