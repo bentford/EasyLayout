@@ -365,8 +365,8 @@
 
 + (void)positionView:(UIView *)targetView aboveView:(UIView *)siblingView offset:(CGSize)offset
 {
-    targetView.extOrigin = CGPointMake(siblingView.extOrigin.x+offset.width,
-                                       siblingView.extOrigin.y-targetView.extSize.height+offset.height);
+    targetView.extOrigin = CGPointMake(floorf(siblingView.extOrigin.x+offset.width),
+                                       floorf(siblingView.extOrigin.y-targetView.extSize.height+offset.height));
 }
 
 + (void)positionView:(UIView *)targetView aboveView:(UIView *)siblingView horizontallyCenterInParent:(UIView *)centerInParent offset:(CGSize)offset
