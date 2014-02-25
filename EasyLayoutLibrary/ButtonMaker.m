@@ -126,8 +126,10 @@
     if (normalImage != nil)
         [newButton setBackgroundImage:normalImage forState:UIControlStateNormal];
     
-    if (selectedImage != nil)
+    if (selectedImage != nil) {
         [newButton setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
+        [newButton setBackgroundImage:selectedImage forState:UIControlStateSelected];
+    }
     
     // size button via text
     [ButtonMaker setText:text forButton:newButton maxWidth:CGFLOAT_MAX];
