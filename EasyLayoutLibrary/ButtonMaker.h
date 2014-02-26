@@ -101,7 +101,8 @@
                                normalImage:(UIImage *)normalImage
                              selectedImage:(UIImage *)selectedImage
                                    padding:(CGSize)padding
-                                textOffset:(CGSize)textOffset;
+                                textOffset:(CGSize)textOffset
+                                   minSize:(CGSize)minSize;
 #pragma mark -
 
 #pragma mark Setting Text on Buttons

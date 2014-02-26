@@ -10,6 +10,28 @@
 #import "ButtonMaker.h"
 #import "EasyLayout.h"
 
+/**
+ Provides few extra features to UIButton.
+ */
+@interface CustomButton : UIButton
+@property (nonatomic, assign) CGSize textOffset;
+@end
+
+@implementation CustomButton
+
+- (void)setTextOffset:(CGSize)textOffset
+{
+    _textOffset = textOffset;
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [EasyLayout centerView:self.titleLabel inParentView:self offset:self.textOffset];
+}
+@end
+
 @implementation ButtonMaker
 
 #pragma mark - Generic Button for Testing
@@ -227,7 +249,7 @@
                        selectedTextAttributes:selectedTextAttributes
                                   normalImage:normalImage
                                 selectedImage:selectedImage
-                                      padding:padding textOffset:CGSizeZero];
+                                      padding:padding textOffset:CGSizeZero minSize:CGSizeZero];
     
 }
 
@@ -239,8 +261,9 @@
                    selectedImage:(UIImage *)selectedImage
                          padding:(CGSize)padding
                       textOffset:(CGSize)textOffset
+                         minSize:(CGSize)minSize
 {
-    UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    CustomButton *newButton = [CustomButton buttonWithType:UIButtonTypeCustom];
     
     NSAttributedString *normalAttributedString = [[NSAttributedString alloc] initWithString:text
                                                                                  attributes:normalTextAttributes];
@@ -265,18 +288,21 @@
     
     // size button via text
     [ButtonMaker setAttributedText:normalAttributedString forButton:newButton maxWidth:CGFLOAT_MAX];
-    
+
     // set alternate state strings
     [newButton setAttributedTitle:selectedAttributedString forState:UIControlStateSelected];
     [newButton setAttributedTitle:selectedAttributedString forState:UIControlStateHighlighted];
     [newButton setAttributedTitle:disabledAttributedString forState:UIControlStateDisabled];
     
     // determine minimum sizes
-    CGFloat largestHeight = MAX(newButton.frame.size.height, normalImage.size.height);
-    CGFloat largestWidth = MAX(newButton.frame.size.width, normalImage.size.width);
+    CGFloat largestHeight = MAX(newButton.frame.size.height + padding.height, normalImage.size.height + padding.height);
+    largestHeight = MAX(largestHeight, minSize.height);
     
-    newButton.frame = CGRectMake(0.0f, 0.0f, largestWidth+padding.width, largestHeight+padding.height);
-    [EasyLayout centerView:newButton.titleLabel inParentView:newButton offset:textOffset];
+    CGFloat largestWidth = MAX(newButton.frame.size.width + padding.width, normalImage.size.width + padding.width);
+    largestWidth = MAX(largestWidth, minSize.width);
+    
+    newButton.frame = CGRectMake(0.0f, 0.0f, largestWidth, largestHeight);
+    newButton.textOffset = textOffset;
     
     return newButton;
 }
