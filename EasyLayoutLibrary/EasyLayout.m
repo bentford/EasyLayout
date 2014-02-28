@@ -292,6 +292,13 @@
     
 }
 
++ (void)positionView:(UIView *)targetView toLeftAndVerticalCenterOfView:(UIView *)siblingView offset:(CGSize)offset
+{
+    targetView.extOrigin = CGPointMake(siblingView.frame.origin.x-targetView.frame.size.width+offset.width,
+                                       siblingView.frame.origin.y+siblingView.extHalfSize.height-targetView.extHalfSize.height+offset.height);
+    
+}
+
 + (void)positionView:(UIView *)targetView toRightOfView:(UIView *)siblingView offset:(CGSize)offset
 {
     targetView.extOrigin = CGPointMake(siblingView.frame.origin.x+siblingView.frame.size.width+offset.width,
