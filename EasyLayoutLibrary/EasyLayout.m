@@ -708,6 +708,14 @@
     else
         button.extSize = [EasyLayout sizeText:button.titleLabel.text font:button.titleLabel.font mode:lineMode maxWidth:maxWidth];
 }
+
++ (void)modifyButton:(UIButton *)button addPaddingWithoutOriginChange:(CGFloat)padding
+{
+    button.extWidth += padding;
+    button.extHeight += padding;
+    button.extX -= floorf(padding/2.0f);
+    button.extY -= floorf(padding/2.0f);
+}
 @end
 
 @implementation EasyLayout(TextField)

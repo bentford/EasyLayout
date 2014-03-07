@@ -123,4 +123,5 @@ typedef enum
 
 @interface EasyLayout(Button)
 + (void)sizeButton:(UIButton *)button mode:(ELLineMode)lineMode maxWidth:(CGFloat)maxWidth;
++ (void)modifyButton:(UIButton *)button addPaddingWithoutOriginChange:(CGFloat)padding;
 @end
