@@ -8,6 +8,8 @@
 #import <UIKit/UIKit.h>
 #import "QuickFrame.h"
 
+#define cgs0 CGSizeZero
+#define cgs(width, height) CGSizeMake(width, height)
 
 @interface UIView(EasyLayoutMethods)
 @property (nonatomic, assign) CGPoint extOrigin;
