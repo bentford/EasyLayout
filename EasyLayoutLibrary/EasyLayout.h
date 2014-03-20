@@ -31,6 +31,7 @@
 
 - (void)extRemoveAllSubviews;
 - (void)extAddSubviews:(NSArray *)subviews;
+- (void)extRemoveSubviews:(NSArray *)subviews;
 @end
 
 @interface EasyLayout : NSObject
