@@ -10,6 +10,7 @@
 
 #define cgs0 CGSizeZero
 #define cgs(width, height) CGSizeMake(width, height)
+#define cgrs(width, height) CGRectMake(0.0f, 0.0f, width, height)
 
 @interface UIView(EasyLayoutMethods)
 @property (nonatomic, assign) CGPoint extOrigin;
