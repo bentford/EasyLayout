@@ -10,6 +10,12 @@
 
 #define cgs0 CGSizeZero
 #define cgs(width, height) CGSizeMake(width, height)
+
+#define cgp0 CGPointZero
+#define cgp(x, y) CGPointMake(x, y)
+
+#define cgr0 CGRectZero
+#define cgr(x, y, width, height) CGRectMake(x, y, width, height)
 #define cgrs(width, height) CGRectMake(0.0f, 0.0f, width, height)
 
 @interface UIView(EasyLayoutMethods)
