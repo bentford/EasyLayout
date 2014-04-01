@@ -15,3 +15,6 @@ Although it is in a rudimentary state, it is quite useful as is.
 * Finish the framework
 
 
+### License
+
+EasyLayout is available under the MIT license. See the LICENSE file for more info.
