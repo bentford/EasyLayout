@@ -11,6 +11,7 @@ EasyLayout requires very little code and effort to build complex layouts.
 * Provide sample project illustrating it's use.
 * Improve documentation
 * Add more layout methods
+* Add visual examples
 
 
 ### License
