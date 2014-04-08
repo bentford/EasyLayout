@@ -597,6 +597,48 @@
     else
         label.extSize = [EasyLayout sizeText:label.text font:label.font mode:lineMode maxWidth:maxWidth];
 }
+@end
+
+@implementation EasyLayout(Button)
++ (void)sizeButton:(UIButton *)button mode:(ELLineMode)lineMode maxWidth:(CGFloat)maxWidth
+{
+    switch (lineMode) {
+        case ELLineModeSingle:
+            button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+            button.titleLabel.numberOfLines = 1;
+            break;
+        case ELLineModeMulti:
+            button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            // zero indicates unlimited lines allowed
+            button.titleLabel.numberOfLines = 0;
+            break;
+    }
+    
+    if (button.titleLabel.attributedText != nil)
+        button.extSize = [EasyLayout sizeAttributedText:button.titleLabel.attributedText mode:lineMode maxWidth:maxWidth];
+    else
+        button.extSize = [EasyLayout sizeText:button.titleLabel.text font:button.titleLabel.font mode:lineMode maxWidth:maxWidth];
+}
+
++ (void)modifyButton:(UIButton *)button addPaddingWithoutOriginChange:(CGFloat)padding
+{
+    button.extWidth += padding;
+    button.extHeight += padding;
+    button.extX -= floorf(padding/2.0f);
+    button.extY -= floorf(padding/2.0f);
+}
+@end
+
+@implementation EasyLayout(TextField)
++ (void)sizeTextFieldHeight:(UITextField *)textField offset:(CGFloat)offset
+{
+    static NSString *placeHolder = @"M";
+    CGSize calculatedSize = [EasyLayout sizeText:placeHolder font:textField.font mode:ELLineModeSingle maxWidth:CGFLOAT_MAX];
+    textField.extQuickFrame.size.height = calculatedSize.height+offset;
+}
+@end
+
+@implementation EasyLayout(NSString)
 
 + (CGSize)sizeAttributedText:(NSAttributedString *)attributedText mode:(ELLineMode)lineMode maxWidth:(CGFloat)maxWidth
 {
@@ -656,9 +698,9 @@
     switch (linebreakMode) {
         case NSLineBreakByWordWrapping:
         case NSLineBreakByCharWrapping:
-                textSize = [attributedText boundingRectWithSize:constrainedToSize
-                                              options:NSStringDrawingUsesLineFragmentOrigin
-                                              context:nil].size;
+            textSize = [attributedText boundingRectWithSize:constrainedToSize
+                                                    options:NSStringDrawingUsesLineFragmentOrigin
+                                                    context:nil].size;
             break;
             
         case NSLineBreakByClipping:
@@ -715,44 +757,5 @@
 }
 
 #pragma mark -
-@end
-
-@implementation EasyLayout(Button)
-+ (void)sizeButton:(UIButton *)button mode:(ELLineMode)lineMode maxWidth:(CGFloat)maxWidth
-{
-    switch (lineMode) {
-        case ELLineModeSingle:
-            button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-            button.titleLabel.numberOfLines = 1;
-            break;
-        case ELLineModeMulti:
-            button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-            // zero indicates unlimited lines allowed
-            button.titleLabel.numberOfLines = 0;
-            break;
-    }
-    
-    if (button.titleLabel.attributedText != nil)
-        button.extSize = [EasyLayout sizeAttributedText:button.titleLabel.attributedText mode:lineMode maxWidth:maxWidth];
-    else
-        button.extSize = [EasyLayout sizeText:button.titleLabel.text font:button.titleLabel.font mode:lineMode maxWidth:maxWidth];
-}
-
-+ (void)modifyButton:(UIButton *)button addPaddingWithoutOriginChange:(CGFloat)padding
-{
-    button.extWidth += padding;
-    button.extHeight += padding;
-    button.extX -= floorf(padding/2.0f);
-    button.extY -= floorf(padding/2.0f);
-}
-@end
-
-@implementation EasyLayout(TextField)
-+ (void)sizeTextFieldHeight:(UITextField *)textField offset:(CGFloat)offset
-{
-    static NSString *placeHolder = @"M";
-    CGSize calculatedSize = [EasyLayout sizeText:placeHolder font:textField.font mode:ELLineModeSingle maxWidth:CGFLOAT_MAX];
-    textField.extQuickFrame.size.height = calculatedSize.height+offset;
-}
 @end
 
