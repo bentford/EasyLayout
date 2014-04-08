@@ -295,6 +295,12 @@
                                        0.0f+offset.height);
 }
 
++ (void)topLeftView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset
+{
+    targetView.extOrigin = CGPointMake(floorf(offset.width),
+                                       floorf(offset.height));
+}
+
 + (void)leftCenterView:(UIView *)targetView inParentView:(UIView *)parentView offset:(CGSize)offset
 {
     targetView.extOrigin = CGPointMake(0.0f+offset.width,
