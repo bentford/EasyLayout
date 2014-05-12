@@ -469,6 +469,9 @@
     targetView.extOrigin = CGPointMake(midXPosition, targetView.extOrigin.y);
 }
 
+/**
+ If firstView or secondView is nil the top of the screen or bottom of the screen will be used, respectively.
+ */
 + (void)positionView:(UIView *)targetView inbetweenVerticallyFirstView:(UIView *)firstView secondView:(UIView *)secondView offset:(CGSize)offset
 {
     CGFloat yPosition;
