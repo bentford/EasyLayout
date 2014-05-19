@@ -29,7 +29,7 @@
 
 #pragma mark - Generic Button for Testing
 + (UIButton *)genericButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action;
-#pragma -
+#pragma mark -
 
 #pragma mark Image Only Buttons
 + (UIButton *)outerButtonWithNormalImage:(UIImage *)normalImage selectedImage:(UIImage *)selectedImage
@@ -127,5 +127,5 @@
 + (void)setText:(NSString *)text forButton:(UIButton *)button maxWidth:(CGFloat)maxWidth;
 + (void)setText:(NSString *)text forButton:(UIButton *)button linebreakMode:(NSLineBreakMode)linebreakMode
                         constrainedToSize:(CGSize)constrainedToSize;
-#pragma -
+#pragma mark -
 @end
