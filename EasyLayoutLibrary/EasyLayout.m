@@ -765,12 +765,19 @@
 @implementation EasyLayout(CGSize)
 + (CGFloat)heightForSize:(CGSize)size fittingWidth:(CGFloat)fitWidth
 {
+    if (size.width == 0.0f)
+        return 0.0f;
+    
     CGFloat ratio = fitWidth / size.width;
+
     return ratio * size.height;
 }
 
 + (CGFloat)widthForSize:(CGSize)size fittingHeight:(CGFloat)fitHeight
 {
+    if (size.height == 0.0f)
+        return 0.0f;
+        
     CGFloat ratio = fitHeight / size.height;
     return ratio * size.width;
 }
