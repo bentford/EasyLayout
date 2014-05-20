@@ -162,3 +162,8 @@ typedef enum
 
 
 @end
+
+@interface EasyLayout(CGSize)
++ (CGFloat)heightForSize:(CGSize)size fittingWidth:(CGFloat)fitWidth;
++ (CGFloat)widthForSize:(CGSize)size fittingHeight:(CGFloat)fitHeight;
+@end

@@ -762,3 +762,16 @@
 #pragma mark -
 @end
 
+@implementation EasyLayout(CGSize)
++ (CGFloat)heightForSize:(CGSize)size fittingWidth:(CGFloat)fitWidth
+{
+    CGFloat ratio = fitWidth / size.width;
+    return ratio * size.height;
+}
+
++ (CGFloat)widthForSize:(CGSize)size fittingHeight:(CGFloat)fitHeight
+{
+    CGFloat ratio = fitHeight / size.height;
+    return ratio * size.width;
+}
+@end
