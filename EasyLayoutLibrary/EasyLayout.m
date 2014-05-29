@@ -770,7 +770,7 @@
     
     CGFloat ratio = fitWidth / size.width;
 
-    return ratio * size.height;
+    return floorf(ratio * size.height);
 }
 
 + (CGFloat)widthForSize:(CGSize)size fittingHeight:(CGFloat)fitHeight
@@ -779,6 +779,6 @@
         return 0.0f;
         
     CGFloat ratio = fitHeight / size.height;
-    return ratio * size.width;
+    return floorf(ratio * size.width);
 }
 @end
