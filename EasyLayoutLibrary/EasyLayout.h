@@ -35,6 +35,10 @@
 #define cgr(x, y, width, height) CGRectMake(x, y, width, height)
 #define cgrs(width, height) CGRectMake(0.0f, 0.0f, width, height)
 
+#define sfr(rect) NSStringFromCGRect(rect)
+#define sfs(size) NSStringFromCGSize(size)
+#define sfp(point) NSStringFromCGPoint(point)
+
 @interface UIView(EasyLayoutMethods)
 @property (nonatomic, assign) CGPoint extOrigin;
 @property (nonatomic, assign) CGSize extSize;
