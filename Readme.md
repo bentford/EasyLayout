@@ -2,7 +2,14 @@
 
 ### Overview
 
-EasyLayout is my experimental framework for performing quick layout of views.  The goal of this framework to replace the need for AutoLayout, which is sort of awful for laying out views in code.
+EasyLayout is my experimental framework for performing quick layout of views.  
+
+- entirely frame based—no fancy constraints needed
+- gracefully handles UILabel and NSAttributedStrings sizing
+- short syntax, easy to autocomplete
+- provides properties you wish you always had on UIView (e.g. view.extX = 10, view.extWidth, view.extTerminus.y)
+ 
+It is much simpler and far less powerful than AutoLayout. But, Autolayout isn't always the right solution.  Frame based layout code is not dead.
 
 EasyLayout requires very little code and effort to build complex layouts.  
 
@@ -25,19 +32,16 @@ Here is an example:
 	    [EasyLayout positionView:imageView belowView:tweetLabel horizontallyCenterInParent:self offset:cgs0];
 	}
 
-### Really?
 
-OK, I'll be honest.  This isn't really a replacement for AutoLayout.  EasyLayout is too simple to be compared with AutoLayout.  Behind the scenes it is just setting the frame rect of views.  It only supports a few commonly used layouts.  It's not that elaborate.
+### Coming Soon
 
-But, I can't stop using it.  I can bang out complex layouts super fast and never have to debug constraint errors.
+I want to add a few features:
 
-
-
-### TODO
-
-* Provide sample project illustrating it's use.
-* Improve documentation
-* Add visual examples
+- align labels using font ascenders and descenders
+- complete the set of alignment scenarios 
+- provide layout demo project to show off how it works
+- improve documentation
+- add visual examples
 
 
 ### License
