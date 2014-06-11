@@ -39,6 +39,7 @@ Here is an example:
 New features I'll work on (in order of priority):
 
 - font aware vertical alignment label and button text (using font ascenders and descenders)
+- prefix classes (and extensions?) with `EL`
 - complete the set of alignment scenarios 
 - provide layout demo project to show off how it works
 - improve documentation
