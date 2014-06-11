@@ -5,9 +5,10 @@
 EasyLayout is my experimental framework for performing quick layout of views.  
 
 - entirely frame based—no fancy constraints needed
-- gracefully handles UILabel and NSAttributedStrings sizing
+- gracefully sizes `UILabel`, `UIButton`, and `NSAttributedStrings`
 - short syntax, easy to autocomplete
-- provides properties you wish you always had on UIView (e.g. view.extX = 10, view.extWidth, view.extTerminus.y)
+- provides properties you wish you always had on UIView (e.g. `view.extX = 10`, `view.extWidth`, `view.extTerminus.y`)
+
  
 It is much simpler and far less powerful than AutoLayout. But, Autolayout isn't always the right solution.  Frame based layout code is not dead.
 
