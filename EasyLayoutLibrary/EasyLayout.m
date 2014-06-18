@@ -710,8 +710,11 @@
         case NSLineBreakByTruncatingHead:
         case NSLineBreakByTruncatingMiddle:
         case NSLineBreakByTruncatingTail:
+            
             textSize = [attributedText boundingRectWithSize:CGSizeMake(constrainedToSize.width, CGFLOAT_MAX)
-                                                    options:NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
+                                                    options:NSStringDrawingUsesFontLeading|
+                                                            NSStringDrawingTruncatesLastVisibleLine|
+                                                            NSStringDrawingUsesLineFragmentOrigin
                                                     context:nil].size;
             break;
     }
