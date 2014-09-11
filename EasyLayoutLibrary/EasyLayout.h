@@ -42,7 +42,7 @@
 @interface UIView(EasyLayoutMethods)
 @property (nonatomic, assign) CGPoint extOrigin;
 @property (nonatomic, assign) CGSize extSize;
-@property (nonatomic, readonly) CGPoint extTerminus;
+@property (nonatomic, assign) CGPoint extTerminus;
 @property (nonatomic, readonly) CGPoint extMedial;
 @property (nonatomic, readonly) CGSize extHalfSize;
 

@@ -86,6 +86,13 @@
     return CGPointMake(self.extOrigin.x+self.extSize.width, self.extOrigin.y+self.extSize.height);
 }
 
+- (void)setExtTerminus:(CGPoint)terminus
+{
+    self.frame = CGRectMake((floorf(terminus.x) - self.extSize.width),
+                            (floorf(terminus.y) - self.extSize.height),
+                            self.extSize.width, self.extSize.height);
+}
+
 - (CGPoint)extMedial
 {
     return CGPointMake(self.extOrigin.x+floorf(self.extSize.width/2.0f), self.extOrigin.y+floorf(self.extSize.height/2.0f));
