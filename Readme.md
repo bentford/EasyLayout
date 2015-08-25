@@ -1,5 +1,7 @@
 # EasyLayout
 
+## This project is at end-of-life, it is no longer being maintained, and it will be removed in the near future.
+
 ### Overview
 
 EasyLayout is my experimental framework for performing quick layout of views.  
